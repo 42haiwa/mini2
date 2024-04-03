@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:32:39 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/03/12 15:20:12 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:10:32 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ void	echo(char **argv, int argc, t_core *core)
 	}
 	if (!is_n)
 		printf("\n");
-	core->err_code = 0;	
+	core->err_code = 0;
 }

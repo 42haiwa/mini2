@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 10:03:18 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/03/29 17:03:33 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:49:09 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,16 @@ typedef struct s_parse
 	char	*tmp;
 }	t_parse;
 
+typedef struct s_three
+{
+	char	**splited;
+	size_t	i;
+	t_node	*father;
+	t_node	*current;
+	size_t	last_pipe;
+	size_t	last_cmd;
+}	t_three;
+
 typedef struct s_repl
 {
 	size_t	i;
@@ -149,9 +159,16 @@ typedef struct s_exec
 	char	**new_argv;
 }	t_exec;
 
+typedef struct s_export
+{
+	int		i;
+	char	*getter;
+	char	*values;
+	char	*tmp;
+}	t_export;
+
 // DELETE THIS
 void	rprint(t_node *node);
-
 
 int		check_exit(char const *s);
 //	builtins.c
@@ -164,6 +181,10 @@ void	cd(char **argv, int argc, t_core *core);
 void	export(char **argv, int argc, t_core *core);
 void	unset(char **argv, int argc, t_core *core);
 int		check_builtins_no_fork(char *buf, char **argv, int argc, t_core *core);
+//export_utils
+void	free_export(char *getter, char *values, char *tmp);
+char	*get_value(char const *s);
+char	*get_getter(char const *s);
 //	parse_envp.c
 void	parse_envp(t_core *core, char **envp);
 //main.c
@@ -215,6 +236,8 @@ void	handler2(int sig, siginfo_t *info, void *ucontext);
 char	*ft_get_path(t_core *core, char *cmd);
 //parse_io
 void	parse_io(t_core *core);
+//parse_io2
+void	part_four2(t_parse *stru, t_core *core);
 //lexing2
 char	**get_double_quote(char *buf);
 char	*get_delimiter(char *token);
@@ -236,7 +259,7 @@ void	ft_close(int fd);
 int		is_ending(char c);
 int		ft_strcmp(const char *s1, const char *s2);
 int		get_n_char(const char *s1, char c);
-char	*ft_strcspn(char* str, char *charset);
+char	*ft_strcspn(char *str, char *charset);
 int		is_charset(char c, char *charset);
 //utils3
 char	*safe_join(char *s1, char *s2, int free_s1, int free_s2);
@@ -246,7 +269,7 @@ char	get_first(char *str, char *charset, size_t start);
 char	*remove_char(char *str, int val);
 //utils4
 int		len_by_char(char *str, char c, size_t start);
-int		ft_contain(char *str, int(*f)(char));
+int		ft_contain(char *str, int (*f)(char));
 int		ft_contain_charset(char *str, char *c);
 int		is_export_enable(char c);
 int		is_end(char c);
@@ -255,6 +278,6 @@ int		check_getter(char *getter);
 //extra
 char	*check_extra(char *buf);
 
-char    **split_buf(char const *buf);
-void    bill_three(t_core *core);
+char	**split_buf(char const *buf);
+void	bill_three(t_core *core);
 #endif

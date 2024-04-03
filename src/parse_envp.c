@@ -6,13 +6,13 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 18:39:48 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/03/12 14:22:42 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:45:13 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_getter(char const *s)
+static char	*get_getter2(char const *s)
 {
 	size_t	len;
 	char	*res;
@@ -44,7 +44,7 @@ void	set_envp(char *getter, char *new_values, t_core *core)
 	values = "";
 	while (core->envp[++i])
 	{
-		tmp = get_getter(core->envp[i]);
+		tmp = get_getter2(core->envp[i]);
 		if (ft_strcmp(getter, tmp) == 0)
 		{
 			tmp2 = ft_strjoin(getter, "=");
@@ -73,7 +73,7 @@ char	*get_envp(char *getter, t_core *core)
 		return (ft_itoa(core->err_code));
 	while (core->envp[++i])
 	{
-		tmp = get_getter(core->envp[i]);
+		tmp = get_getter2(core->envp[i]);
 		if (ft_strcmp(getter, tmp) == 0)
 		{
 			values = ft_strchr(core->envp[i], '=');
@@ -119,7 +119,7 @@ void	remove_envp(char *getter, t_core *core)
 	j = 0;
 	while (core->envp[++i])
 	{
-		tmp = get_getter(core->envp[i]);
+		tmp = get_getter2(core->envp[i]);
 		if (ft_strcmp(getter, tmp) == 0)
 			free(core->envp[i]);
 		else

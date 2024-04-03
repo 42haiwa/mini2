@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 18:44:38 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/03/14 14:18:39 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:51:27 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,20 @@ static void	update_old_pwd(t_core *core)
 {
 	if (ft_strcmp(get_envp("OLDPWD", core), "") == 0)
 		add_envp("OLDPWD", getcwd(NULL, 0), core);
-	else	
+	else
+	{
 		set_envp("OLDPWD", getcwd(NULL, 0), core);
+	}
 }
 
 static void	update_pwd(t_core *core)
 {
 	if (ft_strcmp(get_envp("PWD", core), "") == 0)
 		add_envp("PWD", getcwd(NULL, 0), core);
-	else	
+	else
+	{
 		set_envp("PWD", getcwd(NULL, 0), core);
+	}
 }
 
 static int	cd2(int argc, t_core *core)
