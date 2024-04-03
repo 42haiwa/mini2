@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 02:03:47 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/03 14:15:21 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:26:21 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void	end_exec(t_core *core, t_exec *stru)
 	while (stru->i < stru->cmd)
 	{
 		wait(&status);
-		core->err_code = WEXITSTATUS(status);
+		if (WIFEXITED(status))
+			core->err_code = WEXITSTATUS(status);
 		stru->i++;
 	}
 	stru->i = 0;
