@@ -23,11 +23,11 @@ SRC := src/main.c \
 		src/node_add_son.c \
 		src/node_print_recurse.c \
 		src/parse_envp.c \
-		src/pre_execution.c \
-		src/execution.c \
-		src/execution2.c \
-		src/execution3.c \
-		src/execution_utils.c \
+		src/execution/pre_execution.c \
+		src/execution/execution.c \
+		src/execution/execution2.c \
+		src/execution/execution3.c \
+		src/execution/execution_utils.c \
 		src/handler.c \
 		src/get_path.c \
 		src/parse_io.c \
