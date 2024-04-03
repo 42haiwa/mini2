@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:02:47 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/03 16:08:41 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:37:38 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,19 @@ void	replace_var3(char **buf, t_core *core)
 	if ((*buf)[core->lex_i] == '>' && !core->lex_bool[2] && !core->lex_bool[1])
 	{
 		if ((*buf)[core->lex_i + 1] == '>')
+		{
 			core->lex_i++;
+			if ((*buf)[core->lex_i + 1] != ' ')
+				*buf = add_char(*buf, ' ', core->lex_i + 1);
+			if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
+				*buf = add_char(*buf, ' ', core->lex_i);
+		}
 		else
 		{
 			if ((*buf)[core->lex_i + 1] != ' ')
-			*buf = add_char(*buf, ' ', core->lex_i + 1);
+				*buf = add_char(*buf, ' ', core->lex_i + 1);
 			if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
-			*buf = add_char(*buf, ' ', core->lex_i);
+				*buf = add_char(*buf, ' ', core->lex_i);
 		}
 	}
 	if ((*buf)[core->lex_i] == '<' && !core->lex_bool[2] && !core->lex_bool[1])
