@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 07:16:54 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/03 16:09:16 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:20:13 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_delimiter(char *token)
 	if (ft_strncmp(token, ">", 1) == 0)
 		return ("\7GREAT\7");
 	if (ft_strncmp(token, "<<", 2) == 0)
-		return ("\7LESSSALUTLESS\7");
+		return ("\7LESSLESS\7");
 	if (ft_strncmp(token, "<", 1) == 0)
 		return ("\7LESS\7");
 	return (NULL);
