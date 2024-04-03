@@ -6,7 +6,7 @@
 /*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:51 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/03 16:59:11 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:59:19 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,24 @@ static int	heredoc(int id, char *sep)
 	free(tmp);
 	fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	sep = ft_strjoin(sep, "\n");
+	printf("open heredoc %d\n", id);
 	while (1)
 	{
 		if (g_sig == 1)
 		{
 			g_sig = 0;
-			break ;
+			close(fd);
+			free(path);
+			return (-1);
 		}
 		ft_putstr_fd("> ", 1);
 		line = get_next_line(0);
 		if (!line)
 		{
 			ft_putendl_fd("here-document error", 2);
-			break ;
+			close(fd);
+			free(path);
+			return (-1);
 		}
 		if (sep == NULL && (line[0] == '\n' || line[0] == '\0'))
 			break ;
@@ -89,7 +94,9 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char ** spli
 {
 	ssize_t  i;
 	int      fd;
+	int			hd_status;
 
+	hd_status = 0;
 	i = lpipe + 1;
 	if (!lpipe)
 		i = 0;
@@ -124,7 +131,8 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char ** spli
 		{
 			core->n_heredoc++;
 			current->heredoc_id = core->n_heredoc;
-			heredoc(current->heredoc_id, splited[i + 1]);
+			if (heredoc(current->heredoc_id, splited[i + 1]) == -1)
+				current->heredoc_id = -1;
 			if (i >= 2)
 				i--;
 			else
