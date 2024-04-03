@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:51 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/03 15:27:36 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:59:11 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,22 +95,6 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char ** spli
 		i = 0;
 	while (splited[i] && ft_strcmp(splited[i], "\6PIPE\6") != 0)
 	{
-		if (ft_strcmp(splited[i], "GREAT") == 0)
-		{
-			current->output = ft_strdup(splited[i + 1]);
-			if (i > 0 && ft_strcmp(splited[i - 1], "GREAT") == 0)
-			{
-				current->output_mode = 2;
-				i++;
-			}
-			else
-				current->output_mode = 1;
-			fd = open(current->output, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			if (fd == -1)
-				break ;
-			close(fd);
-		}
-		// todo detect GREAT GREAT
 		if (ft_strcmp(splited[i], "GREATGREAT") == 0)
 		{
 			current->output = ft_strdup(splited[i + 1]);
@@ -120,27 +104,35 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char ** spli
 				break ;
 			close(fd);
 		}
+		else if (ft_strcmp(splited[i], "GREAT") == 0)
+		{
+			current->output = ft_strdup(splited[i + 1]);
+			current->output_mode = 1;
+			fd = open(current->output, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			if (fd == -1)
+				break ;
+			close(fd);
+		}
 		i++;
 	}
-	i--;
-	while (i >= 0 && ft_strcmp(splited[i], "\6PIPE\6"))
+	i = lpipe + 1;
+	if (!lpipe)
+		i = 0;
+	while (splited[i] && ft_strcmp(splited[i], "\6PIPE\6"))
 	{
-		if (ft_strcmp(splited[i], "LESS") == 0)
+		if (ft_strcmp(splited[i], "LESSLESS") == 0)
 		{
-			if (i > 0 && ft_strcmp(splited[i - 1], "LESS") == 0)
-			{
-				core->n_heredoc++;
-				current->heredoc_id = core->n_heredoc;
-				heredoc(current->heredoc_id, splited[i + 1]);
-				if (i >= 2)
-					i--;
-				else
-					break ;
-			}
+			core->n_heredoc++;
+			current->heredoc_id = core->n_heredoc;
+			heredoc(current->heredoc_id, splited[i + 1]);
+			if (i >= 2)
+				i--;
 			else
-				current->input = ft_strdup(splited[i + 1]);
+				break ;
 		}
-		i--;
+		else if (ft_strcmp(splited[i], "LESS") == 0)
+			current->input = ft_strdup(splited[i + 1]);
+		i++;
 	}
 }
 
@@ -172,6 +164,9 @@ void	bill_three(t_core *core)
 			last_pipe = i;
 			continue ;
 		}
+		if (i == 0 && ft_strcmp(splited[0], "LESSLESS") == 0)
+			if (splited[i + 1])
+				heredoc(core->n_heredoc, splited[i + 1]);
 		if (!check_redirect(splited, i) && !is_token(splited[i]))
 		{
 			current = node_init(ft_strdup(splited[i]));
