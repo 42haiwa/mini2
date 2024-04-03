@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:51 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/03 20:21:07 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 21:02:23 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,14 +120,15 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char ** spli
 		i = 0;
 	while (splited[i] && ft_strcmp(splited[i], "\6PIPE\6"))
 	{
+		printf("%zu\n", i);
 		if (ft_strcmp(splited[i], "LESSLESS") == 0)
 		{
 			core->n_heredoc++;
 			current->heredoc_id = core->n_heredoc;
 			if (heredoc(current->heredoc_id, splited[i + 1]) == -1)
 				current->heredoc_id = -1;
-			if (i >= 2)
-				i--;
+			if (splited[i + 1])
+				i++;
 			else
 				break ;
 		}
