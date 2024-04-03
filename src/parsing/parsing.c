@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:51 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/03 18:59:19 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:21:07 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static int	check_redirect(char **split, size_t const i)
 
 static int	heredoc(int id, char *sep)
 {
-	int     fd;
-	char    *path;
-	char    *line;
+	int		fd;
+	char	*path;
+	char	*line;
 	char	*tmp;
 
 	tmp = ft_itoa(id);
@@ -59,21 +59,14 @@ static int	heredoc(int id, char *sep)
 	free(tmp);
 	fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	sep = ft_strjoin(sep, "\n");
-	printf("open heredoc %d\n", id);
 	while (1)
 	{
-		if (g_sig == 1)
-		{
-			g_sig = 0;
-			close(fd);
-			free(path);
-			return (-1);
-		}
 		ft_putstr_fd("> ", 1);
 		line = get_next_line(0);
-		if (!line)
+		if (!line || g_sig == 1)
 		{
-			ft_putendl_fd("here-document error", 2);
+			if (!line)
+				ft_putendl_fd("here-document error", 2);
 			close(fd);
 			free(path);
 			return (-1);
