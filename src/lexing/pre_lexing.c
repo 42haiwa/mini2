@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:02:47 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/03/28 18:36:57 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:43:06 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	replace_var2(char **buf, t_core *core)
 			*buf = add_char(*buf, ' ', core->lex_i);
 	}
 	if ((*buf)[core->lex_i] == ' ' \
-		&& (core->lex_bool[BOTH] || core->lex_bool[D_QUOTE]))
-				(*buf)[core->lex_i] = '_';
+	&& (core->lex_bool[BOTH] || core->lex_bool[D_QUOTE]))
+		(*buf)[core->lex_i] = '_';
 }
 
 char	*replace_var(char *buf, t_core *core)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:01:36 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/03/12 15:12:01 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:35:29 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ char	*ft_get_path(t_core *core, char *cmd)
 		free(path);
 		path = NULL;
 	}
-	ft_free_path(env_path);
+	free_str_tab(env_path);
 	free(str);
-	free(env_path);
 	return (path);
 }
