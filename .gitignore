@@ -7,3 +7,4 @@ a.out
 .*.swo
 */.*.swo
 minishell_tester/
+.*/
