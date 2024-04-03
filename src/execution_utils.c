@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 00:39:11 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/02/11 20:37:51 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:51:15 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_builtins_no_exec(char *buf)
 
 int	is_token(char const *s)
 {
-	if (ft_strncmp(s, "PIPE", 4) == 0)
+	if (ft_strncmp(s, "\6PIPE\6", 4) == 0)
 		return (1);
 	if (ft_strncmp(s, "SEMICOLON", 9) == 0)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:06 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/03/26 15:21:41 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:51:39 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	first_exec(t_core *core, t_exec *stru)
 	if (is_token(core->execution_three->sons[stru->i]->content))
 	{
 		if (ft_strncmp(core->execution_three->sons[stru->i]->content,
-				"PIPE", 4) == 0)
+				"\6PIPE\6", 4) == 0)
 		{
 			stru->pipe_ctr++;
 		}
@@ -151,11 +151,11 @@ void	pre_execution(t_core *core)
 			if (*((char *) core->execution_three->sons[i]->content) == '\0')
 				continue ;
 			k = 1;
-			if (ft_strcmp(core->execution_three->sons[i + 1]->content, "PIPE") == 0)
+			if (ft_strcmp(core->execution_three->sons[i + 1]->content, "\6PIPE\6") == 0)
 				core->execution_three->sons[i]->outpipe = 1;
 			while (((size_t) i + k + 2 < (size_t) core->execution_three->sons_ctr) && *((char *)core->execution_three->sons[i + k]->content) == '\0')
 			{
-				if (((size_t) i + k + 2 < (size_t) core->execution_three->sons_ctr) && ft_strcmp(core->execution_three->sons[i + k + 2]->content, "PIPE") == 0)
+				if (((size_t) i + k + 2 < (size_t) core->execution_three->sons_ctr) && ft_strcmp(core->execution_three->sons[i + k + 2]->content, "\6PIPE\6") == 0)
 				{
 					core->execution_three->sons[i]->outpipe = 1;
 					break ;
