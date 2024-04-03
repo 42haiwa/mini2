@@ -72,6 +72,7 @@ void	three_exec(t_core *core, t_exec *stru)
 	if ((stru->i + 1) < (size_t) core->execution_three->sons_ctr
 		&& core->execution_three->sons[stru->i]->outpipe)
 	{
+		ft_close(stru->pipe_fd[stru->pipe_ctr][0]);
 		dup2(stru->pipe_fd[stru->pipe_ctr][1], STDOUT_FILENO);
 		ft_close(stru->pipe_fd[stru->pipe_ctr][1]);
 		stru->pipe_fd[stru->pipe_ctr][1] = -1;
@@ -109,6 +110,7 @@ void	four_exec(t_core *core, t_exec *stru)
 	}
 	if (stru->i - k > 1 && core->execution_three->sons[stru->i - k - 2]->outpipe)
 	{
+		ft_close(stru->pipe_fd[stru->pipe_ctr][1]);
 		dup2(stru->pipe_fd[stru->pipe_ctr - 1][0], STDIN_FILENO);
 		ft_close(stru->pipe_fd[stru->pipe_ctr - 1][0]);
 		stru->pipe_fd[stru->pipe_ctr - 1][0] = -1;
