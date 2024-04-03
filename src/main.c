@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:37:49 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/03 13:33:34 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:55:06 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,12 @@ int	start(char *buf, t_core *core)
 	free_lexing(core);
 	core->execution_three = node_init(NULL);
 	bill_three(core);
+	if (core->print_lex > 1)
+		rprint(core->execution_three);
 	return (1);
 }
 
-// if (core->print_lex > 1)
-//	rprint(core->execution_three);
+volatile int		g_sig = 0;
 
 int	main(int argc, char *argv[], char *envp[])
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:51 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/03 12:52:07 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:27:36 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,27 @@ static int	heredoc(int id, char *sep)
 	int     fd;
 	char    *path;
 	char    *line;
+	char	*tmp;
 
-	path = ft_strjoin("/tmp/heredoc", ft_itoa(id));
+	tmp = ft_itoa(id);
+	path = ft_strjoin("/tmp/heredoc", tmp);
+	free(tmp);
 	fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	sep = ft_strjoin(sep, "\n");
 	while (1)
 	{
+		if (g_sig == 1)
+		{
+			g_sig = 0;
+			break ;
+		}
 		ft_putstr_fd("> ", 1);
 		line = get_next_line(0);
+		if (!line)
+		{
+			ft_putendl_fd("here-document error", 2);
+			break ;
+		}
 		if (sep == NULL && (line[0] == '\n' || line[0] == '\0'))
 			break ;
 		if (sep)

@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 15:00:50 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/01 22:12:59 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:58:03 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ void rprint_with_indentation(t_node *node, int depth)
 	for (int i = 0; i < depth; i++)
 		printf("\t");
 	printf("Output  : %s\n", (char *) node->output);
+	for (int i = 0; i < depth; i++)
+		printf("\t");
+	printf("Output mode  : %d\n", node->output_mode);
 	for (int i = 0; i < depth; i++)
 		printf("\t");
 	printf("Input  : %s\n", (char *) node->input);

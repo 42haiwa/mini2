@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 10:03:18 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/03 14:32:51 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:53:04 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # include <errno.h>
 
 # include "libft.h"
+
+extern volatile int		g_sig;
 
 typedef struct s_node
 {
