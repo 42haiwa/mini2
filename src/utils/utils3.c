@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 04:00:35 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/03/26 19:00:14 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:07:00 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*safe_join(char *s1, char *s2, int free_s1, int free_s2)
 	if (!s1 && !s2)
 		return (ft_strdup(""));
 	result = ft_strjoin(s1, s2);
-		free(s1);
+	free(s1);
 	if (free_s2)
 		free(s2);
 	return (result);
@@ -56,8 +56,11 @@ char	*get_substring(char *str, char c, int start_index)
 		substring[index - start_index] = '\0';
 		return (substring);
 	}
-	while (str[index])
-		index++;
+	if (index < ft_strlen(str))
+	{
+		while (str[index])
+			index++;
+	}
 	substring = ft_calloc(index - start_index + 2, 1);
 	ft_strncpy(substring, str + start_index, index - start_index + 1);
 	substring[index - start_index] = '\0';
@@ -95,6 +98,8 @@ char	*get_string(char *buf, char start, int index)
 char	get_first(char *str, char *charset, size_t start)
 {
 	if (!str)
+		return (0);
+	if (start >= ft_strlen(str))
 		return (0);
 	while (str[start])
 	{
