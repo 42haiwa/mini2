@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:51 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/01 22:13:42 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:52:07 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char ** spli
 	i = lpipe + 1;
 	if (!lpipe)
 		i = 0;
-	while (splited[i] && ft_strcmp(splited[i], "PIPE") != 0)
+	while (splited[i] && ft_strcmp(splited[i], "\6PIPE\6") != 0)
 	{
 		if (ft_strcmp(splited[i], "GREAT") == 0)
 		{
@@ -110,7 +110,7 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char ** spli
 		i++;
 	}
 	i--;
-	while (i >= 0 && ft_strcmp(splited[i], "PIPE"))
+	while (i >= 0 && ft_strcmp(splited[i], "\6PIPE\6"))
 	{
 		if (ft_strcmp(splited[i], "LESS") == 0)
 		{
@@ -151,10 +151,10 @@ void	bill_three(t_core *core)
 	father = NULL;
 	while (splited[++i])
 	{
-		if (ft_strcmp(splited[i], "PIPE") == 0)
+		if (ft_strcmp(splited[i], "\6PIPE\6") == 0)
 		{
 			father = NULL;
-			node_add_son(core->execution_three, node_init(ft_strdup(splited[i])));
+			node_add_son(core->execution_three, node_init(ft_strdup("\6PIPE\6")));
 			core->cmd_p = 0;
 			last_pipe = i;
 			continue ;

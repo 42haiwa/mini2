@@ -6,7 +6,7 @@
 /*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 07:16:54 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/03/25 18:31:01 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:50:53 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*get_delimiter(char *token)
 {
 	if (ft_strncmp(token, "|", 1) == 0)
-		return ("\7PIPE\7");
+		return ("\7\6PIPE\6\7");
 	if (ft_strncmp(token, ";", 1) == 0)
 		return ("\7SEMICOLON\7");
 	if (ft_strncmp(token, ">>", 2) == 0)
