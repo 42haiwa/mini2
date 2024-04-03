@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 12:40:39 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/03/26 17:17:20 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:36:59 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ static int	check_buf(char *buf, size_t i)
 			return (1);
 		else if (buf[i] == ' ')
 			continue ;
-		else 
+		else
+		{
 			return (0);
+		}
 	}
 	return (0);
 }
@@ -48,11 +50,8 @@ char	*check_extra(char *buf)
 	i = -1;
 	while (buf[++i])
 	{
-		if (buf[i] == '<')
-		{
-			if (check_buf(buf, i))
-				return ("minishell: syntax error near unexpected token");
-		}
+		if (buf[i] == '<' && check_buf(buf, i))
+			return ("minishell: syntax error near unexpected token");
 	}
 	return (NULL);
 }
