@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 12:15:41 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/03 14:10:10 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:35:41 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	replace_main(t_core *core)
 	size_t	i;
 	size_t	j;
 	char	**extract;
+	char	*tmp;
 
 	i = -1;
 	extract = NULL;
@@ -122,8 +123,16 @@ void	replace_main(t_core *core)
 			j = -1;
 			while (extract[++j])
 			{
-				core->get_d_quote[i] = replace(core->get_d_quote[i],
-						extract[j], get_envp(extract[j] + 1, core));
+				if (ft_strcmp(extract[j], "$?") == 0)
+				{
+					tmp = ft_itoa(core->err_code);
+					core->get_d_quote[i] = replace(core->get_d_quote[i],
+							extract[j], tmp);
+					free(tmp);
+				}
+				else
+					core->get_d_quote[i] = replace(core->get_d_quote[i],
+							extract[j], get_envp(extract[j] + 1, core));
 			}
 			free_str_tab(extract);
 		}
