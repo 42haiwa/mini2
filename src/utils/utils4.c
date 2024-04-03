@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:02:39 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/03/26 18:32:05 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:27:58 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_contain_charset(char *str, char *c)
 	return (0);
 }
 
-int	ft_contain(char *str, int(*f)(char))
+int	ft_contain(char *str, int (*f)(char))
 {
 	size_t	i;
 
