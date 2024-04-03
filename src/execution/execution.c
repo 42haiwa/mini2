@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:06 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/03 12:51:39 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:31:47 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,76 +96,27 @@ void	three_exec(t_core *core, t_exec *stru)
 	}
 }
 
-void	four_exec(t_core *core, t_exec *stru)
+void	four_exec(t_core *core, t_exec *stu)
 {
 	size_t	k;
 
 	k = 0;
-	while (stru->i - k > 1)
+	while (stu->i - k > 1)
 	{
-		if (*((char *)core->execution_three->sons[stru->i - k - 2]->content) == '\0')
+		if (*((char *)core->execution_three->sons[stu->i - k - 2]->content) \
+			== '\0')
 			k++;
 		else
 			break ;
 	}
-	if (stru->i - k > 1 && core->execution_three->sons[stru->i - k - 2]->outpipe)
+	if (stu->i - k > 1 && core->execution_three->sons[stu->i - k - 2]->outpipe)
 	{
-		ft_close(stru->pipe_fd[stru->pipe_ctr][1]);
-		dup2(stru->pipe_fd[stru->pipe_ctr - 1][0], STDIN_FILENO);
-		ft_close(stru->pipe_fd[stru->pipe_ctr - 1][0]);
-		stru->pipe_fd[stru->pipe_ctr - 1][0] = -1;
+		ft_close(stu->pipe_fd[stu->pipe_ctr][1]);
+		dup2(stu->pipe_fd[stu->pipe_ctr - 1][0], STDIN_FILENO);
+		ft_close(stu->pipe_fd[stu->pipe_ctr - 1][0]);
+		stu->pipe_fd[stu->pipe_ctr - 1][0] = -1;
 	}
-	if ((core->execution_three->sons[stru->i]->input) != 0)
-	{
-		stru->i_fd = open(core->execution_three->sons[stru->i]->input,
-				O_RDONLY);
-		if (stru->i_fd == -1)
-		{
-			ft_putchar_fd(' ', 2);
-			perror("");
-			exit(1);
-		}
-		dup2(stru->i_fd, STDIN_FILENO);
-		ft_close(stru->i_fd);
-	}
-	if (core->execution_three->sons[stru->i]->heredoc_id)
-	{
-		core->n_heredoc++;
-		char *path = ft_strjoin("/tmp/heredoc", ft_itoa(core->n_heredoc));
-		stru->i_fd = open(path, O_RDONLY);
-		dup2(stru->i_fd, STDIN_FILENO);
-		ft_close(stru->i_fd);
-		unlink(path);
-		free(path);
-	}
-}
-
-void	pre_execution(t_core *core)
-{
-	size_t	i;
-	size_t	k;
-
-	i = -1;
-	while (++i < (size_t) core->execution_three->sons_ctr)
-	{
-		if (i < (size_t) core->execution_three->sons_ctr - 1)
-		{
-			if (*((char *) core->execution_three->sons[i]->content) == '\0')
-				continue ;
-			k = 1;
-			if (ft_strcmp(core->execution_three->sons[i + 1]->content, "\6PIPE\6") == 0)
-				core->execution_three->sons[i]->outpipe = 1;
-			while (((size_t) i + k + 2 < (size_t) core->execution_three->sons_ctr) && *((char *)core->execution_three->sons[i + k]->content) == '\0')
-			{
-				if (((size_t) i + k + 2 < (size_t) core->execution_three->sons_ctr) && ft_strcmp(core->execution_three->sons[i + k + 2]->content, "\6PIPE\6") == 0)
-				{
-					core->execution_three->sons[i]->outpipe = 1;
-					break ;
-				}
-				k++;
-			}
-		}
-	}
+	in_four_exec(core, stu);
 }
 
 void	execution(t_core *core)
@@ -190,9 +141,7 @@ void	execution(t_core *core)
 			five_exec(core, &stru);
 		}
 		else
-		{
 			six_exec(core, &stru);
-		}
 		free_str_tab(stru.new_argv);
 	}
 	end_exec(core, &stru);

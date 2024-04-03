@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 12:15:41 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/03/29 19:11:05 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:10:10 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,13 @@ char	**exctract_env(char *s)
 		return (NULL);
 	result = (char **)ft_calloc((stru.occurence + 1), sizeof(char *));
 	stru.i = 0;
- 	stru.val = 0;
+	stru.val = 0;
 	while (s[stru.i])
 	{
 		if (s[stru.i] == '$' && s[stru.i + 1] == '?')
 			speciale(&stru, result);
-		else if (s[stru.i] == '$' && s[stru.i + 1] != ' ' && s[stru.i + 1] != '\0')
+		else if (s[stru.i] == '$' && s[stru.i + 1] \
+		!= ' ' && s[stru.i + 1] != '\0')
 			extract_env2(&stru, s, result);
 		else
 			stru.i++;

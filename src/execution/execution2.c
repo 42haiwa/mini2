@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 02:03:47 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/03/26 15:20:25 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:15:21 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,30 @@ void	five_exec(t_core *core, t_exec *stru)
 	exit(1);
 }
 
-void	six_exec(t_core *core, t_exec *stru)
+void	six_exec(t_core *core, t_exec *stu)
 {
 	size_t	k;
 
 	k = 0;
-	while (stru->i - k > 1)
+	while (stu->i - k > 1)
 	{
-		if (*((char *)core->execution_three->sons[stru->i - k - 2]->content) == '\0')
+		if (*((char *)core->execution_three->sons[stu->i - k - 2]->content)
+			== '\0')
 			k++;
 		else
 			break ;
 	}
-
-	stru->cmd++;
-	if ((stru->i + 1) < (size_t) core->execution_three->sons_ctr
-		&& core->execution_three->sons[stru->i]->outpipe)
+	stu->cmd++;
+	if ((stu->i + 1) < (size_t) core->execution_three->sons_ctr
+		&& core->execution_three->sons[stu->i]->outpipe)
 	{
-		ft_close(stru->pipe_fd[stru->pipe_ctr][1]);
-		stru->pipe_fd[stru->pipe_ctr][1] = -1;
+		ft_close(stu->pipe_fd[stu->pipe_ctr][1]);
+		stu->pipe_fd[stu->pipe_ctr][1] = -1;
 	}
-	if (stru->i - k > 1 && core->execution_three->sons[stru->i - k - 2]->outpipe)
+	if (stu->i - k > 1 && core->execution_three->sons[stu->i - k - 2]->outpipe)
 	{
-		ft_close(stru->pipe_fd[stru->pipe_ctr - 1][0]);
-		stru->pipe_fd[stru->pipe_ctr - 1][0] = -1;
+		ft_close(stu->pipe_fd[stu->pipe_ctr - 1][0]);
+		stu->pipe_fd[stu->pipe_ctr - 1][0] = -1;
 	}
 }
 
