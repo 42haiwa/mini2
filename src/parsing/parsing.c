@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:51 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/04 13:09:51 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:17:43 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,11 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char ** spli
 				break ;
 		}
 		else if (ft_strcmp(splited[i], "LESS") == 0)
+		{
+			if (current->input)
+				free(current->input);
 			current->input = ft_strdup(splited[i + 1]);
+		}
 		i++;
 	}
 }
