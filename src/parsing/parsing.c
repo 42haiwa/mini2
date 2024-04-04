@@ -6,7 +6,7 @@
 /*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:51 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/04 14:17:43 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:19:06 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char ** spli
 	{
 		if (ft_strcmp(splited[i], "GREATGREAT") == 0)
 		{
+			if (current->output)
+				free(current->output);
 			current->output = ft_strdup(splited[i + 1]);
 			current->output_mode = 2;
 			fd = open(current->output, O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -111,6 +113,8 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char ** spli
 		}
 		else if (ft_strcmp(splited[i], "GREAT") == 0)
 		{
+			if (current->output)
+				free(current->output);
 			current->output = ft_strdup(splited[i + 1]);
 			current->output_mode = 1;
 			fd = open(current->output, O_WRONLY | O_CREAT | O_TRUNC, 0644);
