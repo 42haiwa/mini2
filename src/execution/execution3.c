@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:06 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/04 11:19:08 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:34:53 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	in_four_exec(t_core *core, t_exec *stru)
 		{
 			ft_putchar_fd(' ', 2);
 			perror("");
+			free_three(&core->execution_three);
+			free_str_tab(stru->new_argv);
+			free_str_tab(core->envp);
 			exit(1);
 		}
 		dup2(stru->i_fd, STDIN_FILENO);
