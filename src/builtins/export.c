@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 20:54:52 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/03 11:49:47 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:53:55 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ void	export(char **argv, int argc, t_core *core)
 		if (ft_strchr(argv[n.i], '=') == NULL)
 			continue ;
 		if (export_getter(&n, core, argv))
+		{
+			free(n.getter);
 			return ;
-		n.values = get_value(argv[n.i]);
+		}
 		export_values(argv, &n, core);
 		free_export(n.getter, n.values, n.tmp);
 	}

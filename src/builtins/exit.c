@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:18:24 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/03/13 10:56:58 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:23:48 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	is_valid(char *str)
 	{
 		if (!(ft_isdigit(str[i]) || ((str[i] == '+' || str[i] == '-') && !i)))
 		{
-			ft_putstr_fd("bash: exit: ", 2);
+			ft_putstr_fd("minishell: exit: ", 2);
 			ft_putstr_fd(str, 2);
 			ft_putstr_fd(": numeric argument required\n", 2);
 			return (0);
