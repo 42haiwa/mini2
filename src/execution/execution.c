@@ -6,7 +6,7 @@
 /*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:06 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/04 13:40:53 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:25:12 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ void	three_exec(t_core *core, t_exec *stru)
 		{
 			ft_putchar_fd(' ', 2);
 			perror("");
+			free_str_tab(core->envp);
+			free_str_tab(stru->new_argv);
+			free_three(&core->execution_three);
 			exit(1);
 		}
 		dup2(stru->o_fd, STDOUT_FILENO);
