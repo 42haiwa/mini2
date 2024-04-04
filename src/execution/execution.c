@@ -6,7 +6,7 @@
 /*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:06 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/04 13:06:39 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:14:48 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ int	first_exec(t_core *core, t_exec *stru)
 
 int	second_exec(t_core *core, t_exec *s)
 {
+	if (ft_strcmp(core->execution_three->sons[s->i]->content, "exit") == 0)
+		if (core->execution_three->sons_ctr > 1)
+			return (1);
 	if (check_builtins_no_fork(core->execution_three->sons[s->i]->content,
 			s->new_argv, core->execution_three->sons[s->i]->sons_ctr + 1,
 			core))
