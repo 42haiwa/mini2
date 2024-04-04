@@ -6,7 +6,7 @@
 /*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 02:03:47 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/03 20:48:18 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:02:21 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,15 @@ void	five_exec(t_core *core, t_exec *stru)
 	cmd = ft_strdup(core->execution_three->sons[stru->i]->content);
 	argc = core->execution_three->sons[stru->i]->sons_ctr + 1;
 	free_three(&core->execution_three);
-	if (check_builtins(cmd, stru->new_argv, argc, core))
+	stru->i = 0;
+	while (stru->i < 128)
 	{
-		stru->i = 0;
-		while (stru->i < 128)
-		{
-			ft_close(stru->pipe_fd[stru->i][0]);
-			ft_close(stru->pipe_fd[stru->i][1]);
-			stru->i++;
-		}
-		exit(0);
+		ft_close(stru->pipe_fd[stru->i][0]);
+		ft_close(stru->pipe_fd[stru->i][1]);
+		stru->i++;
 	}
+	if (check_builtins(cmd, stru->new_argv, argc, core))
+		exit(0);
 	execve(cmd, stru->new_argv, core->envp);
 	perror("minishell");
 	exit(1);

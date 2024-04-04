@@ -6,7 +6,7 @@
 /*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:51 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/03 21:02:23 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:03:15 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char ** spli
 		i = 0;
 	while (splited[i] && ft_strcmp(splited[i], "\6PIPE\6"))
 	{
-		printf("%zu\n", i);
 		if (ft_strcmp(splited[i], "LESSLESS") == 0)
 		{
 			core->n_heredoc++;
