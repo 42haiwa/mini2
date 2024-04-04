@@ -6,7 +6,7 @@
 /*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 02:03:47 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/04 13:02:21 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:44:13 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ void	five_exec(t_core *core, t_exec *stru)
 	if (check_builtins(cmd, stru->new_argv, argc, core))
 		exit(0);
 	execve(cmd, stru->new_argv, core->envp);
+	free_str_tab(core->envp);
+	free_str_tab(stru->new_argv);
+	free(cmd);
 	perror("minishell");
 	exit(1);
 }
