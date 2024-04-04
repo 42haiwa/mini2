@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:51 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/04 13:03:15 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:09:51 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,40 +47,45 @@ static int	check_redirect(char **split, size_t const i)
 	return (0);
 }
 
-static int	heredoc(int id, char *sep)
+static int    heredoc(int id, char *sep)
 {
-	int		fd;
-	char	*path;
-	char	*line;
-	char	*tmp;
+    int        fd;
+    char    *path;
+    char    *line;
+    char    *tmp;
 
-	tmp = ft_itoa(id);
-	path = ft_strjoin("/tmp/heredoc", tmp);
-	free(tmp);
-	fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	sep = ft_strjoin(sep, "\n");
-	while (1)
-	{
-		ft_putstr_fd("> ", 1);
-		line = get_next_line(0);
-		if (!line || g_sig == 1)
-		{
-			if (!line)
-				ft_putendl_fd("here-document error", 2);
-			close(fd);
-			free(path);
-			return (-1);
-		}
-		if (sep == NULL && (line[0] == '\n' || line[0] == '\0'))
-			break ;
-		if (sep)
-			if (ft_strcmp(line, sep) == 0)
-				break ;
-		ft_putstr_fd(line, fd);
-	}
-	close(fd);
-	free(path);
-	return (0);
+    tmp = ft_itoa(id);
+    path = ft_strjoin("/tmp/heredoc", tmp);
+    free(tmp);
+    fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+    sep = ft_strjoin(sep, "\n");
+    while (1)
+    {
+        ft_putstr_fd("> ", 1);
+        line = get_next_line(STDIN_FILENO);
+        if (!line || g_sig == 1)
+        {
+            if (!line)
+                ft_putendl_fd("here-document error", 2);
+            g_sig = 0;
+            close(fd);
+            free(path);
+            free(sep);
+            free(line);
+            return (-1);
+        }
+        if (sep == NULL && (line[0] == '\n' || line[0] == '\0'))
+            break ;
+        if (ft_strcmp(line, sep) == 0)
+            break ;
+        ft_putstr_fd(line, fd);
+        free(line);
+    }
+    free(line);
+    free(path);
+    free(sep);
+    close(fd);
+    return (0);
 }
 
 static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char ** splited)
