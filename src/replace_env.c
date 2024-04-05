@@ -6,36 +6,11 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 12:15:41 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/03 16:35:41 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:42:27 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*replace(char *s, char *old, char *new)
-{
-	char	*find;
-	int		old_len;
-	int		new_len;
-	int		new_size;
-	char	*result;
-
-	find = ft_strstr(s, old);
-	if (find != NULL)
-	{
-		old_len = ft_strlen(old);
-		new_len = ft_strlen(new);
-		new_size = ft_strlen(s) - old_len + new_len;
-		result = (char *)ft_calloc(new_size + 1, 1);
-		ft_strncpy(result, s, find - s);
-		result[find - s] = '\0';
-		ft_strcat(result, new);
-		ft_strcat(result, find + old_len);
-		free(s);
-		return (result);
-	}
-	return (s);
-}
 
 void	speciale(t_repl *stru, char **result)
 {
@@ -104,12 +79,29 @@ char	**exctract_env(char *s)
 	return (result);
 }
 
+void	replace_main2(t_core *core, char **extract, size_t j, size_t i)
+{
+	char	*tmp;
+
+	if (ft_strcmp(extract[j], "$?") == 0)
+	{
+		tmp = ft_itoa(core->err_code);
+		core->get_d_quote[i] = replace(core->get_d_quote[i],
+				extract[j], tmp);
+		free(tmp);
+	}
+	else
+	{
+		core->get_d_quote[i] = replace(core->get_d_quote[i],
+				extract[j], get_envp(extract[j] + 1, core));
+	}
+}
+
 void	replace_main(t_core *core)
 {
 	size_t	i;
 	size_t	j;
 	char	**extract;
-	char	*tmp;
 
 	i = -1;
 	extract = NULL;
@@ -123,16 +115,7 @@ void	replace_main(t_core *core)
 			j = -1;
 			while (extract[++j])
 			{
-				if (ft_strcmp(extract[j], "$?") == 0)
-				{
-					tmp = ft_itoa(core->err_code);
-					core->get_d_quote[i] = replace(core->get_d_quote[i],
-							extract[j], tmp);
-					free(tmp);
-				}
-				else
-					core->get_d_quote[i] = replace(core->get_d_quote[i],
-							extract[j], get_envp(extract[j] + 1, core));
+				replace_main2(core, extract, j, i);
 			}
 			free_str_tab(extract);
 		}

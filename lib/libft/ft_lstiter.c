@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler.c                                          :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/08 11:38:53 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/05 17:23:21 by aallou-v         ###   ########.fr       */
+/*   Created: 2023/10/19 19:30:29 by aallou-v          #+#    #+#             */
+/*   Updated: 2023/10/19 19:33:23 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	handler(int sig)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (sig == SIGINT)
+	while (lst != NULL)
 	{
-		g_sig = 1;
-		printf("\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
+		(*f)(lst->content);
+		if (!lst->next)
+			return ;
+		lst = lst->next;
 	}
-}
-
-void	handler2(int sig, siginfo_t *info, void *ucontext)
-{
-	(void) sig;
-	(void) info;
-	(void) ucontext;
 }

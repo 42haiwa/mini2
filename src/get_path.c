@@ -6,23 +6,11 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:01:36 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/03 13:35:29 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:32:36 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-static void	ft_free_path(char **env_path)
-{
-	int	i;
-
-	i = -1;
-	while (env_path[++i])
-	{
-		free(env_path[i]);
-		env_path[i] = NULL;
-	}
-}
 
 char	*ft_get_path(t_core *core, char *cmd)
 {

@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler.c                                          :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/08 11:38:53 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/05 17:23:21 by aallou-v         ###   ########.fr       */
+/*   Created: 2023/10/19 15:15:22 by aallou-v          #+#    #+#             */
+/*   Updated: 2023/10/19 18:10:07 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	handler(int sig)
+t_list	*ft_lstnew(void *content)
 {
-	if (sig == SIGINT)
-	{
-		g_sig = 1;
-		printf("\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-	}
-}
+	t_list	*result;
 
-void	handler2(int sig, siginfo_t *info, void *ucontext)
-{
-	(void) sig;
-	(void) info;
-	(void) ucontext;
+	result = malloc(sizeof(t_list));
+	if (!result)
+		return (NULL);
+	result->content = content;
+	result->next = NULL;
+	return (result);
 }

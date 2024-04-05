@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:06 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/04 14:25:12 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:54:00 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,7 @@ void	three_exec(t_core *core, t_exec *stru)
 			stru->o_fd = open(core->execution_three->sons[stru->i]->output,
 					O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (stru->o_fd == -1)
-		{
-			ft_putchar_fd(' ', 2);
-			perror("");
-			free_str_tab(core->envp);
-			free_str_tab(stru->new_argv);
-			free_three(&core->execution_three);
-			exit(1);
-		}
+			in_three_exec(core, stru);
 		dup2(stru->o_fd, STDOUT_FILENO);
 		ft_close(stru->o_fd);
 	}

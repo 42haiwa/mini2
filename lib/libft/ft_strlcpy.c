@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/08 11:38:53 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/05 17:23:21 by aallou-v         ###   ########.fr       */
+/*   Created: 2023/10/16 14:16:52 by aallou-v          #+#    #+#             */
+/*   Updated: 2023/10/17 19:26:51 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	handler(int sig)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	if (sig == SIGINT)
+	unsigned int	i;
+	unsigned int	j;
+
+	i = ft_strlen(src);
+	j = 0;
+	if (i + 1 < size)
 	{
-		g_sig = 1;
-		printf("\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
+		while (j < i + 1)
+		{
+			dest[j] = src[j];
+			j++;
+		}
 	}
-}
-
-void	handler2(int sig, siginfo_t *info, void *ucontext)
-{
-	(void) sig;
-	(void) info;
-	(void) ucontext;
+	else if (size > 0)
+	{
+		while (j < size - 1)
+		{
+			dest[j] = src[j];
+			j++;
+		}
+		dest[j] = 0;
+	}
+	return (i);
 }

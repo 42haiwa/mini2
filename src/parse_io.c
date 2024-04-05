@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_io.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 21:41:19 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/03/14 11:54:26 by cjouenne         ###   ########.fr       */
+/*   Created: 2024/04/05 18:22:45 by aallou-v          #+#    #+#             */
+/*   Updated: 2024/04/05 18:24:15 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,21 +94,12 @@ void	part_four(t_parse *stru, t_core *core, char *path)
 		free(core->execution_three->sons[stru->j + 1]->content);
 		core->execution_three->sons[stru->j]->content = ft_strdup("\0");
 		core->execution_three->sons[stru->j + 1]->content = ft_strdup("\0");
-		if (stru->i == 0 && (ssize_t) stru->i + 2 < core->execution_three->sons_ctr)
+		if (stru->i == 0 && (ssize_t) stru->i + 2
+			< core->execution_three->sons_ctr)
 			core->execution_three->sons[stru->i + 2]->input = path;
 		else if (stru->i > 0)
 		{
-			if (((char *)core->execution_three->sons[stru->i]->content)[0] == '\0')
-			{
-				if ((ssize_t) stru->i + 2 < core->execution_three->sons_ctr)
-				{
-					core->execution_three->sons[stru->i + 2]->input = path;
-					return ;
-				}
-				else if ((ssize_t) stru->i + 2 >= core->execution_three->sons_ctr)
-					return ;
-			}
-			core->execution_three->sons[stru->i]->input = path;
+			inside_part_four(stru, core, path);
 		}
 	}
 }

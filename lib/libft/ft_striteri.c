@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler.c                                          :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/08 11:38:53 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/05 17:23:21 by aallou-v         ###   ########.fr       */
+/*   Created: 2023/10/19 02:51:55 by aallou-v          #+#    #+#             */
+/*   Updated: 2023/10/19 03:09:01 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	handler(int sig)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	if (sig == SIGINT)
-	{
-		g_sig = 1;
-		printf("\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-	}
-}
+	int	i;
 
-void	handler2(int sig, siginfo_t *info, void *ucontext)
-{
-	(void) sig;
-	(void) info;
-	(void) ucontext;
+	i = -1;
+	while (s[++i])
+		(*f)(i, &s[i]);
 }

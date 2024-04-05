@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 04:00:35 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/03 13:49:24 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:33:21 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*get_substring(char *str, char c, int start_index)
 		substring[index - start_index] = '\0';
 		return (substring);
 	}
-	if (index < ft_strlen(str))
+	if ((size_t) index < ft_strlen(str))
 	{
 		while (str[index])
 			index++;

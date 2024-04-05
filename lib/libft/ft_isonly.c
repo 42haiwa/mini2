@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler.c                                          :+:      :+:    :+:   */
+/*   ft_isonly.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/08 11:38:53 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/05 17:23:21 by aallou-v         ###   ########.fr       */
+/*   Created: 2023/11/12 22:24:12 by aallou-v          #+#    #+#             */
+/*   Updated: 2023/12/02 17:00:05 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	handler(int sig)
+static int	ft_is_charset(char c, char *charset)
 {
-	if (sig == SIGINT)
-	{
-		g_sig = 1;
-		printf("\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-	}
+	int	i;
+
+	i = -1;
+	while (charset[++i])
+		if (c == charset[i])
+			return (1);
+	return (0);
 }
 
-void	handler2(int sig, siginfo_t *info, void *ucontext)
+int	ft_isonly(char *s, char *charset)
 {
-	(void) sig;
-	(void) info;
-	(void) ucontext;
+	int	i;
+
+	i = -1;
+	while (s[++i])
+	{
+		if (!ft_is_charset(s[i], charset))
+			return (0);
+	}
+	return (1);
 }

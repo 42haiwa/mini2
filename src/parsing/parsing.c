@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:51 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/04 14:19:06 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:41:15 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	**split_buf(char const *buf)
 {
-	char    *buf_sep;
-	char    **splited;
-	size_t  i;
+	char	*buf_sep;
+	char	**splited;
+	size_t	i;
 
 	i = -1;
 	buf_sep = ft_calloc(sizeof(char), ft_strlen(buf) + 1);
@@ -47,52 +47,54 @@ static int	check_redirect(char **split, size_t const i)
 	return (0);
 }
 
-static int    heredoc(int id, char *sep)
+static int	heredoc(int id, char *sep)
 {
-    int        fd;
-    char    *path;
-    char    *line;
-    char    *tmp;
+	int		fd;
+	char	*path;
+	char	*line;
+	char	*tmp;
 
-    tmp = ft_itoa(id);
-    path = ft_strjoin("/tmp/heredoc", tmp);
-    free(tmp);
-    fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
-    sep = ft_strjoin(sep, "\n");
-    while (1)
-    {
-        ft_putstr_fd("> ", 1);
-        line = get_next_line(STDIN_FILENO);
-        if (!line || g_sig == 1)
-        {
-            if (!line)
-                ft_putendl_fd("here-document error", 2);
-            g_sig = 0;
-            close(fd);
-            free(path);
-            free(sep);
-            free(line);
-            return (-1);
-        }
-        if (sep == NULL && (line[0] == '\n' || line[0] == '\0'))
-            break ;
-        if (ft_strcmp(line, sep) == 0)
-            break ;
-        ft_putstr_fd(line, fd);
-        free(line);
-    }
-    free(line);
-    free(path);
-    free(sep);
-    close(fd);
-    return (0);
+	tmp = ft_itoa(id);
+	path = ft_strjoin("/tmp/heredoc", tmp);
+	free(tmp);
+	fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	sep = ft_strjoin(sep, "\n");
+	while (1)
+	{
+		ft_putstr_fd("> ", 1);
+		line = get_next_line(STDIN_FILENO);
+		if (!line || g_sig == 1)
+		{
+			if (!line)
+				ft_putendl_fd("here-document error", 2);
+			g_sig = 0;
+			get_next_line(INT_MAX);
+			close(fd);
+			free(path);
+			free(sep);
+			free(line);
+			return (-1);
+		}
+		if (sep == NULL && (line[0] == '\n' || line[0] == '\0'))
+			break ;
+		if (ft_strcmp(line, sep) == 0)
+			break ;
+		ft_putstr_fd(line, fd);
+		free(line);
+	}
+	get_next_line(INT_MAX);
+	free(line);
+	free(path);
+	free(sep);
+	close(fd);
+	return (0);
 }
 
-static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char ** splited)
+static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char **splited)
 {
-	ssize_t  i;
-	int      fd;
-	int			hd_status;
+	ssize_t	i;
+	int		fd;
+	int		hd_status;
 
 	hd_status = 0;
 	i = lpipe + 1;
@@ -152,12 +154,12 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char ** spli
 
 void	bill_three(t_core *core)
 {
-	char    **splited;
-	size_t  i;
-	t_node  *father;
-	t_node  *current;
-	size_t  last_pipe;
-	size_t  last_cmd;
+	char	**splited;
+	size_t	i;
+	t_node	*father;
+	t_node	*current;
+	size_t	last_pipe;
+	size_t	last_cmd;
 
 	if (core->lexer_out == NULL)
 		return ;

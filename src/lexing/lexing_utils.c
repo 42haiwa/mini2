@@ -6,11 +6,19 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 07:16:54 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/03 16:20:13 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:36:43 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	init_var(t_core *core)
+{
+	core->lex_i = -1;
+	core->lex_bool[BOTH] = 0;
+	core->lex_bool[QUOTE] = 0;
+	core->lex_bool[D_QUOTE] = 0;
+}
 
 char	*get_delimiter(char *token)
 {

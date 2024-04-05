@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler.c                                          :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/08 11:38:53 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/05 17:23:21 by aallou-v         ###   ########.fr       */
+/*   Created: 2023/10/17 14:50:17 by aallou-v          #+#    #+#             */
+/*   Updated: 2023/10/19 16:27:48 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	handler(int sig)
+char	*ft_strrchr(const char *s, int c)
 {
-	if (sig == SIGINT)
+	char	*last_occurrence;
+
+	last_occurrence = NULL;
+	while (*s)
 	{
-		g_sig = 1;
-		printf("\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
+		if (*s == (char)c)
+			last_occurrence = (char *)s;
+		s++;
 	}
+	if (*s == (const char) c)
+		return ((char *) s);
+	return (last_occurrence);
 }
 
-void	handler2(int sig, siginfo_t *info, void *ucontext)
+/*
+int	main(int argc, char **agrv)
 {
-	(void) sig;
-	(void) info;
-	(void) ucontext;
+	char	*v1 = "teste";
+	char	*v2 = ft_strrchr(v1, '\0');
+	printf("%s / %s", v1, v2);
+	return (1);
 }
+*/

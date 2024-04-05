@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handler.c                                          :+:      :+:    :+:   */
+/*   parse_io2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/08 11:38:53 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/05 17:23:21 by aallou-v         ###   ########.fr       */
+/*   Created: 2024/01/17 21:41:19 by aallou-v          #+#    #+#             */
+/*   Updated: 2024/04/05 18:20:37 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handler(int sig)
+void	inside_part_four(t_parse *stru, t_core *core, char *path)
 {
-	if (sig == SIGINT)
+	if (((char *)core->execution_three->sons[stru->i]->content)[0] == '\0')
 	{
-		g_sig = 1;
-		printf("\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
+		if ((ssize_t) stru->i + 2 < core->execution_three->sons_ctr)
+		{
+			core->execution_three->sons[stru->i + 2]->input = path;
+			return ;
+		}
+		else if ((ssize_t) stru->i + 2 >= core->execution_three->sons_ctr)
+			return ;
 	}
-}
-
-void	handler2(int sig, siginfo_t *info, void *ucontext)
-{
-	(void) sig;
-	(void) info;
-	(void) ucontext;
+	core->execution_three->sons[stru->i]->input = path;
 }

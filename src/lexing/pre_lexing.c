@@ -6,21 +6,29 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:02:47 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/03 16:37:38 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:38:16 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_var(t_core *core)
+static void	replace_var4(char **buf, t_core *core)
 {
-	core->lex_i = -1;
-	core->lex_bool[BOTH] = 0;
-	core->lex_bool[QUOTE] = 0;
-	core->lex_bool[D_QUOTE] = 0;
+	if ((*buf)[core->lex_i] == '<' && !core->lex_bool[2] && !core->lex_bool[1])
+	{
+		if ((*buf)[core->lex_i + 1] == '<')
+			core->lex_i++;
+		else
+		{
+			if ((*buf)[core->lex_i + 1] != ' ')
+				*buf = add_char(*buf, ' ', core->lex_i + 1);
+			if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
+				*buf = add_char(*buf, ' ', core->lex_i);
+		}
+	}
 }
 
-void	replace_var3(char **buf, t_core *core)
+static void	replace_var3(char **buf, t_core *core)
 {
 	if ((*buf)[core->lex_i] == '>' && !core->lex_bool[2] && !core->lex_bool[1])
 	{
@@ -40,21 +48,10 @@ void	replace_var3(char **buf, t_core *core)
 				*buf = add_char(*buf, ' ', core->lex_i);
 		}
 	}
-	if ((*buf)[core->lex_i] == '<' && !core->lex_bool[2] && !core->lex_bool[1])
-	{
-		if ((*buf)[core->lex_i + 1] == '<')
-			core->lex_i++;
-		else
-		{
-			if ((*buf)[core->lex_i + 1] != ' ')
-			*buf = add_char(*buf, ' ', core->lex_i + 1);
-			if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
-			*buf = add_char(*buf, ' ', core->lex_i);
-		}
-	}
+	replace_var4(buf, core);
 }
 
-void	replace_var2(char **buf, t_core *core)
+static void	replace_var2(char **buf, t_core *core)
 {
 	if ((*buf)[core->lex_i] == '\'')
 	{
@@ -83,7 +80,7 @@ void	replace_var2(char **buf, t_core *core)
 		(*buf)[core->lex_i] = '_';
 }
 
-char	*replace_var(char *buf, t_core *core)
+static char	*replace_var(char *buf, t_core *core)
 {
 	char	*save;
 	char	*tmp;

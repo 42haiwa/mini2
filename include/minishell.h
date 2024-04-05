@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 10:03:18 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/03 15:53:04 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:52:43 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
@@ -170,9 +171,6 @@ typedef struct s_export
 	char	*tmp;
 }	t_export;
 
-// DELETE THIS
-void	rprint(t_node *node);
-
 int		check_exit(char const *s);
 //	builtins.c
 int		check_builtins(char *buf, char **argv, int argc, t_core *core);
@@ -211,12 +209,7 @@ int		ft_check_end_quote(char *buf, t_core *core);
 //parsing
 char	*dup_until(char const *s, char until, int is_include);
 void	rm_sep_three(t_node *node);
-void	fill_three(t_core *core);
 void	free_three(struct s_node **node);
-void	verify_token(size_t *i, t_node **current,
-			t_node **father, t_core *core);
-void	verify_token2(size_t *i, t_node **current,
-			t_node **father, t_core *core);
 //execution
 void	pre_execution(t_core *core);
 void	execution(t_core *core);
@@ -227,6 +220,7 @@ void	init_exec(t_exec *stru);
 void	end_exec(t_core *core, t_exec *stru);
 //execution3
 void	in_four_exec(t_core *core, t_exec *stru);
+void	in_three_exec(t_core *core, t_exec *stru);
 //execution_utils
 int		is_token(char const *s);
 int		check_builtins_no_exec(char *buf);
@@ -242,12 +236,12 @@ char	*ft_get_path(t_core *core, char *cmd);
 //parse_io
 void	parse_io(t_core *core);
 //parse_io2
-void	part_four2(t_parse *stru, t_core *core);
+void	inside_part_four(t_parse *stru, t_core *core, char *path);
 //lexing2
 char	**get_double_quote(char *buf);
 char	*get_delimiter(char *token);
 void	add_block(const char *s, t_core *core, int delimiter);
-char	*init_lexing(t_core *core, char *buf);
+void	init_var(t_core *core);
 //get_quote
 char	**get_quote(char *buf);
 
@@ -278,6 +272,8 @@ int		ft_contain(char *str, int (*f)(char));
 int		ft_contain_charset(char *str, char *c);
 int		is_export_enable(char c);
 int		is_end(char c);
+//utils5
+char	*replace(char *s, char *old, char *new);
 //export_unset_utils
 int		check_getter(char *getter);
 //extra

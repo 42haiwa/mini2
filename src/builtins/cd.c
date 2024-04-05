@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 18:44:38 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/03 20:32:42 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:06:55 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,39 @@ static int	cd2(int argc, t_core *core)
 	{
 		ft_putstr_fd("cd: too many arguments\n", 2);
 		core->err_code = 1;
-		return (0);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
 
-void	cd(char **argv, int argc, t_core *core)
+static int	cd3(t_core *core, int argc)
 {
-	int		check;
+	int	check;
 
-	if (!cd2(argc, core))
-		return ;
 	if (argc <= 1)
 	{
 		update_old_pwd(core);
 		check = chdir(get_envp("HOME", core));
 		update_pwd(core);
 		core->err_code = 0;
-		return ;
+		if (check != 0)
+		{
+			ft_putstr_fd("cd: HOME not set\n", 2);
+			core->err_code = 1;
+		}
+		return (1);
 	}
+	return (0);
+}
+
+void	cd(char **argv, int argc, t_core *core)
+{
+	int		check;
+
+	if (cd2(argc, core))
+		return ;
+	if (cd3(core, argc))
+		return ;
 	update_old_pwd(core);
 	check = chdir(argv[1]);
 	if (check != 0)
