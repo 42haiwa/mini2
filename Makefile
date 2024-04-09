@@ -40,8 +40,10 @@ SRC := src/main.c \
 		src/utils/utils4.c \
 		src/utils/utils5.c \
 		src/builtins/export_unset_utils.c \
-		src/parsing/parsing.c \
-		src/parsing/parsing_utils.c
+		src/parsing/bill_three.c \
+		src/parsing/parse_io_n.c \
+		src/parsing/parsing_utils.c \
+		src/parsing/heredoc.c
 OBJ := $(SRC:.c=.o)
 
 %.o:		%.c

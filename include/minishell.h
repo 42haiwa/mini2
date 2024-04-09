@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 10:03:18 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/05 18:52:43 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/09 23:56:56 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,22 @@ typedef struct s_core
 *              *
 ***************/
 
-//remove
-void rprint_with_indentation(t_node *node, int depth);
-void rprint(t_node *node);
-
 typedef struct s_d_quote
 {
 	size_t	var[2];
 	int		boolean[2];
 	size_t	double_quote_number;
 }	t_d_quote;
+
+typedef struct s_parsing
+{
+	char	**splited;
+	size_t	i;
+	t_node	*father;
+	t_node	*current;
+	size_t	last_pipe;
+	size_t	last_cmd;
+}	t_parsing;
 
 typedef struct s_d_count
 {
@@ -285,4 +291,9 @@ char	*check_extra(char *buf);
 
 char	**split_buf(char const *buf);
 void	bill_three(t_core *core);
+int		check_redirect(char **split, size_t const i);
+//heredoc
+int		heredoc(int id, char *sep);
+//parse_io_n
+void	parse_io_n(t_core *core, size_t lpipe, t_node *curr, char **splited);
 #endif
