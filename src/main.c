@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:37:49 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/05 17:25:08 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/09 22:32:34 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	start(char *buf, t_core *core)
 	error = check_extra(buf);
 	if (error)
 	{
+		core->err_code = 2;
 		ft_putendl_fd(error, 2);
 		return (0);
 	}
