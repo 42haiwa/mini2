@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 02:03:47 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/04 13:44:13 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/10 01:10:55 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	six_exec(t_core *core, t_exec *stu)
 	}
 }
 
-void	init_exec(t_exec *stru)
+void	init_exec(t_exec *stru, t_core *core)
 {
 	stru->cmd = 0;
 	stru->pipe_ctr = 0;
@@ -79,6 +79,7 @@ void	init_exec(t_exec *stru)
 		stru->i++;
 	}
 	stru->i = -1;
+	core->stru = stru;
 }
 
 void	end_exec(t_core *core, t_exec *stru)

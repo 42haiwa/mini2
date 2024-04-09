@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:18:24 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/07 19:07:11 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/10 01:12:25 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,19 @@ static int	is_valid(char *str)
 
 static void	free_exit(int option, char **argv, t_core *core)
 {
+	int	i;
+
+	i = 0;
 	if (core)
 	{
 		free_three(&core->execution_three);
 		free_str_tab(core->envp);
+	}
+	while (i < 128)
+	{
+		ft_close(core->stru->pipe_fd[i][0]);
+		ft_close(core->stru->pipe_fd[i][1]);
+		i++;
 	}
 	free_str_tab(argv);
 	rl_clear_history();

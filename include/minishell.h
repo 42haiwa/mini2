@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 10:03:18 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/09 23:56:56 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/10 01:13:48 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,31 +57,32 @@ void	node_print_recurse(t_node *root);
 
 typedef struct s_core
 {
-	int		cmd_p;
-	char	**envp;
-	char	*folder;
-	int		is_children;
-	char	*lexer_out;
-	int		son_pid;
-	int		err_code;
-	char	**get_d_quote;
-	char	**get_quote;
-	char	*tmp;
-	int		lex_n_quote;
-	int		lex_n_d_quote;
-	int		lex_bool[3];
-	char	*lex_join;
-	int		print_lex;
-	int		boolean;
-	char	*substr;
-	char	first;
-	size_t	lex_count;
-	size_t	lex_count2;
-	size_t	lex_i;
-	size_t	lex_x;
-	int		redirect_parse_tracker;
-	t_node	*execution_three;
-	int		n_heredoc;
+	int				cmd_p;
+	char			**envp;
+	char			*folder;
+	int				is_children;
+	char			*lexer_out;
+	int				son_pid;
+	int				err_code;
+	char			**get_d_quote;
+	char			**get_quote;
+	char			*tmp;
+	int				lex_n_quote;
+	int				lex_n_d_quote;
+	int				lex_bool[3];
+	char			*lex_join;
+	int				print_lex;
+	int				boolean;
+	char			*substr;
+	char			first;
+	struct s_exec	*stru;
+	size_t			lex_count;
+	size_t			lex_count2;
+	size_t			lex_i;
+	size_t			lex_x;
+	int				redirect_parse_tracker;
+	t_node			*execution_three;
+	int				n_heredoc;
 }	t_core;
 
 /***************
@@ -226,7 +227,7 @@ void	execution(t_core *core);
 //execution2
 void	five_exec(t_core *core, t_exec *stru);
 void	six_exec(t_core *core, t_exec *stru);
-void	init_exec(t_exec *stru);
+void	init_exec(t_exec *stru, t_core *core);
 void	end_exec(t_core *core, t_exec *stru);
 //execution3
 void	in_four_exec(t_core *core, t_exec *stru);

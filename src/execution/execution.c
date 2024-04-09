@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:06 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/07 19:09:03 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/10 01:14:03 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	execution(t_core *core)
 {
 	t_exec	stru;
 
-	init_exec(&stru);
+	init_exec(&stru, core);
 	while (++stru.i < (size_t) core->execution_three->sons_ctr)
 	{
 		if (first_exec(core, &stru) == 1)
