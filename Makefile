@@ -1,9 +1,4 @@
-NAME := minishell
-
-CFLAGS := -g -Iinclude -Werror -Wall -Wextra
-LDFLAGS := -Llib/libft -lft -Llib/get_next_line -lgnl -lreadline
-
-SRC := src/main.c \
+SRC			= src/main.c \
 		src/lexing/lexing.c \
 		src/lexing/pre_lexing.c \
 		src/lexing/lexing_utils.c \
@@ -44,41 +39,55 @@ SRC := src/main.c \
 		src/parsing/parse_io_n.c \
 		src/parsing/parsing_utils.c \
 		src/parsing/heredoc.c
-OBJ := $(SRC:.c=.o)
 
-%.o:		%.c
-			$(CC) $(CFLAGS) -c $< -o $@
+OBJ 		= $(SRC:.c=.o)
 
-$(NAME):	lft_all gnl_all $(OBJ)
-			$(CC) $(OBJ) -o $(NAME) $(LDFLAGS)
+FT			= lib/libft
+LIBFT 		= lib/libft/libft.a
+GNL			= lib/gnl
+LIBGNL		= lib/gnl/libgnl.a
 
-gnl_all:
-			$(MAKE) -C lib/get_next_line
-gnl_clean:
-			$(MAKE) clean -C lib/get_next_line
-gnl_fclean:
-			$(MAKE) fclean -C lib/get_next_line
-gnl_re:
-			$(MAKE) re -C lib/get_next_line
+CC 			= cc
+CLONE		= git clone --depth=1
+CFLAGS 		= -Wall -Wextra -Werror -Iinclude
+LDFLAGS 	= -lreadline
 
-lft_all:
-			$(MAKE) -C lib/libft
-lft_clean:
-			$(MAKE) clean -C lib/libft
-lft_fclean:
-			$(MAKE) fclean -C lib/libft
-lft_re:
-			$(MAKE) re -C lib/libft
+NAME 		= minishell
 
-all:		$(NAME)
+all: $(NAME)
 
-clean:		lft_clean gnl_clean
-			$(RM) -f $(OBJ)
+$(NAME): $(OBJ) $(LIBFT) $(LIBGNL)
+	$(CC) $(CFLAGS) $^ -o $(NAME) $(LDFLAGS)
 
-fclean:		lft_fclean gnl_fclean clean
-			$(RM) -f $(NAME)
+$(LIBFT):
+	$(MAKE) -C lib/libft
+	
+$(LIBGNL):
+	$(MAKE) -C lib/gnl
 
-re:			gnl_re fclean all
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY:		all clean fclean re gnl_all gnl_clean gnl_fclean gnl_re lft_all lft_clean lft_fclean lft_re
+debug: fclean
+	$(MAKE) DEBUG=1 all
+
+clean: 
+	if [ -d "$(FT)" ]; then $(MAKE) clean -C $(FT); fi
+	if [ -d "$(GNL)" ]; then $(MAKE) clean -C $(GNL); fi
+	$(RM) $(OBJ)
+
+fclean: clean
+	$(RM) $(LIBFT)
+	$(RM) $(LIBGNL)
+	$(RM) $(NAME)
+
+clear:
+	$(RM) -r $(FT)
+	$(RM) -r $(GNL)
+
+re: fclean all
+
+-include myrules.mk
+
+.PHONY: all debug clean fclean clear re
 

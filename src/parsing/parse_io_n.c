@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 23:52:25 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/10 00:21:10 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/10 01:31:19 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,7 @@ static int	inside_parse(char ***splited, t_node **curr, ssize_t *i)
 void	parse_io_n(t_core *core, size_t lpipe, t_node *curr, char **splited)
 {
 	ssize_t	i;
-	int		hd_status;
 
-	hd_status = 0;
 	i = lpipe + 1;
 	if (!lpipe)
 		i = 0;
