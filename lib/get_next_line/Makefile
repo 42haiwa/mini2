@@ -11,7 +11,7 @@ RM		    := rm -f
 %.o:		%.c
 			$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME):	$(OBJ) all
+$(NAME):	$(OBJ)
 			$(AR) $(ARFLAGS) $(NAME) $(OBJ)
 
 all:		$(NAME)
