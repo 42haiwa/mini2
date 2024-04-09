@@ -17,7 +17,13 @@ static void	replace_var4(char **buf, t_core *core)
 	if ((*buf)[core->lex_i] == '<' && !core->lex_bool[2] && !core->lex_bool[1])
 	{
 		if ((*buf)[core->lex_i + 1] == '<')
-			core->lex_i++;
+		{
+			if ((*buf)[core->lex_i + 2] != ' ')
+				*buf = add_char(*buf, ' ', core->lex_i + 2);
+			if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
+				*buf = add_char(*buf, ' ', core->lex_i);
+			core->lex_i += 2;
+		}
 		else
 		{
 			if ((*buf)[core->lex_i + 1] != ' ')
@@ -34,11 +40,11 @@ static void	replace_var3(char **buf, t_core *core)
 	{
 		if ((*buf)[core->lex_i + 1] == '>')
 		{
-			core->lex_i++;
-			if ((*buf)[core->lex_i + 1] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i + 1);
+			if ((*buf)[core->lex_i + 2] != ' ')
+				*buf = add_char(*buf, ' ', core->lex_i + 2);
 			if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
 				*buf = add_char(*buf, ' ', core->lex_i);
+			core->lex_i += 2;
 		}
 		else
 		{
