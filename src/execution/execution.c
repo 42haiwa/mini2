@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:06 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/05 18:54:00 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/07 19:09:03 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	execution(t_core *core)
 		core->son_pid = stru.c_pid;
 		if (stru.c_pid == 0)
 		{
+			rl_clear_history();
 			three_exec(core, &stru);
 			four_exec(core, &stru);
 			five_exec(core, &stru);

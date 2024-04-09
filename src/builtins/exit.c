@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:18:24 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/04 13:23:48 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/07 19:07:11 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	free_exit(int option, char **argv, t_core *core)
 		free_str_tab(core->envp);
 	}
 	free_str_tab(argv);
+	rl_clear_history();
 	exit(option);
 }
 
