@@ -8,3 +8,4 @@ a.out
 */.*.swo
 minishell_tester/
 .*/
+*.a
