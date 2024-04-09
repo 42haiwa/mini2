@@ -1,4 +1,0 @@
-echo feur > test.txt < sddaas
-simplement mettre un dossier
-exit dans un pipe exit alors qu'il ne devrait pas.
-Leak
