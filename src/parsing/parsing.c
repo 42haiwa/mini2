@@ -6,7 +6,7 @@
 /*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:51 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/09 22:14:16 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/09 23:06:55 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ static int	heredoc(int id, char *sep)
 	free(tmp);
 	fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	sep = ft_strjoin(sep, "\n");
+	if (!sep)
+	{
+		sep = ft_calloc(2, 1);
+		sep[0] = '\n';
+		sep[1] = '\0';
+	}
 	while (1)
 	{
 		ft_putstr_fd("> ", 1);
