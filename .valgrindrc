@@ -1,3 +1,4 @@
+--track-fds=yes
 --keep-debuginfo=yes
 --leak-check=full
 --show-leak-kinds=all
