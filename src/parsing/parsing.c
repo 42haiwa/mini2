@@ -6,7 +6,7 @@
 /*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:51 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/09 23:06:55 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/09 23:28:24 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,8 @@ void	bill_three(t_core *core)
 			last_pipe = i;
 			continue ;
 		}
+		if (i == 0 && ft_strcmp(splited[0], "\6LESSLESS\6") == 0 && splited[i + 1] && !splited[i + 2])
+			heredoc(1, splited[i + 1]);
 		if (!check_redirect(splited, i) && !is_token(splited[i]))
 		{
 			current = node_init(ft_strdup(splited[i]));
