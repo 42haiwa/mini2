@@ -36,7 +36,7 @@ void	second_part_parse(t_parse *s, t_core *core, char *pth)
 {
 	if ((s->j + 1 < core->execution_three->sons_ctr)
 		&& ft_strncmp(core->execution_three->sons[s->j]->content,
-			"LESSLESS", 8) == 0)
+			"\6LESSLESS\6", 8) == 0)
 	{
 		pth = ft_substr(core->execution_three->sons[s->j + 1]->content, 1,
 				ft_strlen(core->execution_three->sons[s->j + 1]->content) - 2);
@@ -85,7 +85,7 @@ void	part_four(t_parse *stru, t_core *core, char *path)
 {
 	if ((stru->j + 1 < core->execution_three->sons_ctr)
 		&& ft_strncmp(core->execution_three->sons[stru->j]->content,
-			"LESS", 4) == 0)
+			"\6LESS\6", 4) == 0)
 	{
 		path = ft_substr(core->execution_three->sons[stru->j + 1]->content, 1,
 				ft_strlen(core->execution_three->sons[stru->j + 1]->content)

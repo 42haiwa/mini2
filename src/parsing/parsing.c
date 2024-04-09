@@ -35,13 +35,13 @@ static int	check_redirect(char **split, size_t const i)
 {
 	if (i >= 1 && split[i - 1])
 	{
-		if (ft_strcmp(split[i - 1], "GREAT") == 0)
+		if (ft_strcmp(split[i - 1], "\6GREAT\6") == 0)
 			return (1);
-		if (ft_strcmp(split[i - 1], "GREATGREAT") == 0)
+		if (ft_strcmp(split[i - 1], "\6GREATGREAT\6") == 0)
 			return (1);
-		if (ft_strcmp(split[i - 1], "LESS") == 0)
+		if (ft_strcmp(split[i - 1], "\6LESS\6") == 0)
 			return (1);
-		if (ft_strcmp(split[i - 1], "LESSLESS") == 0)
+		if (ft_strcmp(split[i - 1], "\6LESSLESS\6") == 0)
 			return (1);
 	}
 	return (0);
@@ -102,7 +102,7 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char **split
 		i = 0;
 	while (splited[i] && ft_strcmp(splited[i], "\6PIPE\6") != 0)
 	{
-		if (ft_strcmp(splited[i], "GREATGREAT") == 0)
+		if (ft_strcmp(splited[i], "\6GREATGREAT\6") == 0)
 		{
 			if (current->output)
 				free(current->output);
@@ -113,7 +113,7 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char **split
 				break ;
 			close(fd);
 		}
-		else if (ft_strcmp(splited[i], "GREAT") == 0)
+		else if (ft_strcmp(splited[i], "\6GREAT\6") == 0)
 		{
 			if (current->output)
 				free(current->output);
@@ -131,7 +131,7 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char **split
 		i = 0;
 	while (splited[i] && ft_strcmp(splited[i], "\6PIPE\6"))
 	{
-		if (ft_strcmp(splited[i], "LESSLESS") == 0)
+		if (ft_strcmp(splited[i], "\6LESSLESS\6") == 0)
 		{
 			core->n_heredoc++;
 			current->heredoc_id = core->n_heredoc;
@@ -142,7 +142,7 @@ static void	parse_io_n(t_core *core, size_t lpipe, t_node *current, char **split
 			else
 				break ;
 		}
-		else if (ft_strcmp(splited[i], "LESS") == 0)
+		else if (ft_strcmp(splited[i], "\6LESS\6") == 0)
 		{
 			if (current->input)
 				free(current->input);
@@ -180,7 +180,7 @@ void	bill_three(t_core *core)
 			last_pipe = i;
 			continue ;
 		}
-		if (i == 0 && ft_strcmp(splited[0], "LESSLESS") == 0)
+		if (i == 0 && ft_strcmp(splited[0], "\6LESSLESS\6") == 0)
 			if (splited[i + 1])
 				heredoc(core->n_heredoc, splited[i + 1]);
 		if (!check_redirect(splited, i) && !is_token(splited[i]))

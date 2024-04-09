@@ -35,3 +35,33 @@ void	free_three(struct s_node **node)
 	free(*node);
 	*node = NULL;
 }
+
+void rprint_with_indentation(t_node *node, int depth)
+{
+	if (node == NULL)
+		return;
+	for (int i = 0; i < depth; i++)
+		printf("\t");
+	printf("Contenu : %s\n", (char *) node->content);
+	for (int i = 0; i < depth; i++)
+		printf("\t");
+	printf("Output  : %s\n", (char *) node->output);
+	for (int i = 0; i < depth; i++)
+		printf("\t");
+	printf("Output mode  : %d\n", node->output_mode);
+	for (int i = 0; i < depth; i++)
+		printf("\t");
+	printf("Input  : %s\n", (char *) node->input);
+	if (node->sons != NULL)
+	{
+		for (ssize_t i = 0; i < node->sons_ctr; ++i)
+		{
+			rprint_with_indentation(node->sons[i], depth + 1);
+		}
+	}
+}
+
+void rprint(t_node *node)
+{
+	rprint_with_indentation(node, 0);
+}

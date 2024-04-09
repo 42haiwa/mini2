@@ -27,13 +27,13 @@ char	*get_delimiter(char *token)
 	if (ft_strncmp(token, ";", 1) == 0)
 		return ("\7SEMICOLON\7");
 	if (ft_strncmp(token, ">>", 2) == 0)
-		return ("\7GREATGREAT\7");
+		return ("\7\6GREATGREAT\6\7");
 	if (ft_strncmp(token, ">", 1) == 0)
-		return ("\7GREAT\7");
+		return ("\7\6GREAT\6\7");
 	if (ft_strncmp(token, "<<", 2) == 0)
-		return ("\7LESSLESS\7");
+		return ("\7\6LESSLESS\6\7");
 	if (ft_strncmp(token, "<", 1) == 0)
-		return ("\7LESS\7");
+		return ("\7\6LESS\6\7");
 	return (NULL);
 }
 

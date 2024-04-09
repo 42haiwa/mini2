@@ -92,6 +92,10 @@ typedef struct s_core
 *              *
 ***************/
 
+//remove
+void rprint_with_indentation(t_node *node, int depth);
+void rprint(t_node *node);
+
 typedef struct s_d_quote
 {
 	size_t	var[2];
