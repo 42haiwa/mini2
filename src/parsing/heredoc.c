@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:57:26 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/10 14:52:42 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:33:26 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	init_heredoc(int *fd, char **path, char **sep, int id)
 	if (!*sep)
 	{
 		*sep = ft_calloc(2, 1);
-		*sep[0] = '\n';
-		*sep[1] = '\0';
+		(*sep)[0] = '\n';
+		(*sep)[1] = '\0';
 	}
 }
 
