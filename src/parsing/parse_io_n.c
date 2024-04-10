@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_io_n.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 23:52:25 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/10 01:31:19 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:58:52 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	inside_parse(char ***splited, t_node **curr, ssize_t *i)
 			free((*curr)->output);
 		(*curr)->output = ft_strdup((*splited)[(*i) + 1]);
 		(*curr)->output_mode = 2;
-		fd = open((*curr)->output, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		fd = open((*curr)->output, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (fd == -1)
 			return (1);
 		close(fd);

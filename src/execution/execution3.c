@@ -6,7 +6,7 @@
 /*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:06 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/10 12:20:34 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:59:40 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@ void	in_three_exec(t_core *core, t_exec *stru)
 {
 	ft_putchar_fd(' ', 2);
 	perror("");
+	stru->i = 0;
+	while (stru->i < 128)
+	{
+		ft_close(stru->pipe_fd[stru->i][0]);
+		ft_close(stru->pipe_fd[stru->i][1]);
+		stru->i++;
+	}
 	free_str_tab(core->envp);
 	free_str_tab(stru->new_argv);
 	free_three(&core->execution_three);
@@ -78,6 +85,13 @@ void	in_four_exec(t_core *core, t_exec *stru)
 		{
 			ft_putchar_fd(' ', 2);
 			perror("");
+			stru->i = 0;
+			while (stru->i < 128)
+			{
+				ft_close(stru->pipe_fd[stru->i][0]);
+				ft_close(stru->pipe_fd[stru->i][1]);
+				stru->i++;
+			}
 			free_three(&core->execution_three);
 			free_str_tab(stru->new_argv);
 			free_str_tab(core->envp);
