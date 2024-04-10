@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 02:03:47 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/10 01:10:55 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:19:05 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ void	six_exec(t_core *core, t_exec *stu)
 	size_t	k;
 
 	k = 0;
+	if (core->execution_three->sons[stu->i]->heredoc_id == -1)
+		core->n_heredoc++;
+	else if (core->execution_three->sons[stu->i]->heredoc_id)
+		core->n_heredoc++;
 	while (stu->i - k > 1)
 	{
 		if (*((char *)core->execution_three->sons[stu->i - k - 2]->content)
