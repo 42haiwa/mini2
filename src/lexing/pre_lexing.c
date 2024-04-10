@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_lexing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:02:47 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/09 22:01:16 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:02:51 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void	replace_var4(char **buf, t_core *core)
 				*buf = add_char(*buf, ' ', core->lex_i);
 		}
 	}
+	if ((*buf)[core->lex_i] == '\t' && !core->lex_bool[2] && !core->lex_bool[1])
+		(*buf)[core->lex_i] = ' ';
 }
 
 static void	replace_var3(char **buf, t_core *core)
