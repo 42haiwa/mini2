@@ -6,15 +6,15 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 00:46:55 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/05 14:48:39 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:44:16 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "minishell.h"
 
-int	is_line(t_list *list)
+int	is_line(t_gnl *list)
 {
-	t_list	*current;
+	t_gnl	*current;
 	size_t	i;
 
 	if (!list)
@@ -30,9 +30,9 @@ int	is_line(t_list *list)
 	return (0);
 }
 
-t_list	*get_last_block(t_list *list)
+t_gnl	*get_last_block(t_gnl *list)
 {
-	t_list	*current;
+	t_gnl	*current;
 
 	current = list;
 	while (current && current->next)
@@ -40,7 +40,7 @@ t_list	*get_last_block(t_list *list)
 	return (current);
 }
 
-void	alloc_line(t_list *list, char **line)
+void	alloc_line(t_gnl *list, char **line)
 {
 	size_t	i;
 	size_t	len;
@@ -64,10 +64,10 @@ void	alloc_line(t_list *list, char **line)
 	*line = malloc(len + 1);
 }
 
-void	dealloc_list(t_list *list)
+void	dealloc_list(t_gnl *list)
 {
-	t_list	*current;
-	t_list	*next;
+	t_gnl	*current;
+	t_gnl	*next;
 
 	current = list;
 	while (current)

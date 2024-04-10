@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:38:53 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/05 17:23:21 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:18:43 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,17 @@ void	handler2(int sig, siginfo_t *info, void *ucontext)
 	(void) sig;
 	(void) info;
 	(void) ucontext;
+}
+
+void	handler3(int sig)
+{
+	if (sig == SIGINT)
+	{
+		g_sig = 1;
+		printf("\n");
+		close(g_in);
+		g_in = -1;
+		rl_replace_line("", 0);
+		rl_on_new_line();
+	}
 }

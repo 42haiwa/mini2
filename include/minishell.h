@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 10:03:18 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/10 01:13:48 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:53:05 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # include "libft.h"
 
 extern volatile int		g_sig;
+extern volatile int		g_in;
 
 typedef struct s_node
 {
@@ -172,6 +173,7 @@ typedef struct s_exec
 	size_t	cmd;
 	char	*test;
 	char	**new_argv;
+	size_t	k;
 }	t_exec;
 
 typedef struct s_export
@@ -242,6 +244,7 @@ size_t	get_len(const char *s, int *index, const char c);
 //handler
 void	handler(int sig);
 void	handler2(int sig, siginfo_t *info, void *ucontext);
+void	handler3(int sig);
 //get_path
 char	*ft_get_path(t_core *core, char *cmd);
 //parse_io
@@ -297,4 +300,27 @@ int		check_redirect(char **split, size_t const i);
 int		heredoc(int id, char *sep);
 //parse_io_n
 void	parse_io_n(t_core *core, size_t lpipe, t_node *curr, char **splited);
+
+//GNL
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 128
+# endif
+
+typedef struct s_gnl
+{
+	char			*data;
+	struct s_gnl	*next;
+}	t_gnl;
+
+void	alloc_line(t_gnl *list, char **line);
+int		is_line(t_gnl *list);
+t_gnl	*get_last_block(t_gnl *list);
+void	dealloc_list(t_gnl *list);
+size_t	_ft_strlen(const char *s);
+
+void	_get_line(t_gnl *list, char **line);
+void	read_and_stack(t_gnl **list, int *read_return, int fd);
+void	clear_list(t_gnl **list);
+char	*get_next_line(int fd);
+
 #endif

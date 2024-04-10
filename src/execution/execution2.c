@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 02:03:47 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/10 12:19:05 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:31:36 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,34 +37,32 @@ void	five_exec(t_core *core, t_exec *stru)
 	exit(1);
 }
 
-void	six_exec(t_core *core, t_exec *stu)
+void	six_exec(t_core *co, t_exec *s)
 {
-	size_t	k;
-
-	k = 0;
-	if (core->execution_three->sons[stu->i]->heredoc_id == -1)
-		core->n_heredoc++;
-	else if (core->execution_three->sons[stu->i]->heredoc_id)
-		core->n_heredoc++;
-	while (stu->i - k > 1)
+	s->k = 0;
+	if (co->execution_three->sons[s->i]->heredoc_id == -1)
+		co->n_heredoc++;
+	else if (co->execution_three->sons[s->i]->heredoc_id)
+		co->n_heredoc++;
+	while (s->i - s->k > 1)
 	{
-		if (*((char *)core->execution_three->sons[stu->i - k - 2]->content)
+		if (*((char *)co->execution_three->sons[s->i - s->k - 2]->content)
 			== '\0')
-			k++;
+			s->k++;
 		else
 			break ;
 	}
-	stu->cmd++;
-	if ((stu->i + 1) < (size_t) core->execution_three->sons_ctr
-		&& core->execution_three->sons[stu->i]->outpipe)
+	s->cmd++;
+	if ((s->i + 1) < (size_t) co->execution_three->sons_ctr
+		&& co->execution_three->sons[s->i]->outpipe)
 	{
-		ft_close(stu->pipe_fd[stu->pipe_ctr][1]);
-		stu->pipe_fd[stu->pipe_ctr][1] = -1;
+		ft_close(s->pipe_fd[s->pipe_ctr][1]);
+		s->pipe_fd[s->pipe_ctr][1] = -1;
 	}
-	if (stu->i - k > 1 && core->execution_three->sons[stu->i - k - 2]->outpipe)
+	if (s->i - s->k > 1 && co->execution_three->sons[s->i - s->k - 2]->outpipe)
 	{
-		ft_close(stu->pipe_fd[stu->pipe_ctr - 1][0]);
-		stu->pipe_fd[stu->pipe_ctr - 1][0] = -1;
+		ft_close(s->pipe_fd[s->pipe_ctr - 1][0]);
+		s->pipe_fd[s->pipe_ctr - 1][0] = -1;
 	}
 }
 
@@ -105,4 +103,5 @@ void	end_exec(t_core *core, t_exec *stru)
 		ft_close(stru->pipe_fd[stru->i][1]);
 		stru->i++;
 	}
+	core->stru = NULL;
 }

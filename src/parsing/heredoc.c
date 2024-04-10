@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:57:26 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/10 12:20:19 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:52:42 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,19 @@ static void	init_heredoc(int *fd, char **path, char **sep, int id)
 static void	free_heredoc(int fd, char *path, char *sep, char *line)
 {
 	g_sig = 0;
-	get_next_line(INT_MAX);
+	close(g_in);
 	close(fd);
 	free(path);
 	free(sep);
 	free(line);
+	get_next_line(INT_MAX);
+}
+
+static void	finish_by_ctrl(int fd, char *path, char *sep, char *line)
+{
+	if (g_sig != 1)
+		ft_putendl_fd("here-document error", 2);
+	free_heredoc(fd, path, sep, line);
 }
 
 int	heredoc(int id, char *sep)
@@ -45,16 +53,15 @@ int	heredoc(int id, char *sep)
 	char	*path;
 	char	*line;
 
+	g_in = dup(STDOUT_FILENO);
 	init_heredoc(&fd, &path, &sep, id);
 	while (1)
 	{
 		ft_putstr_fd("> ", 1);
-		line = get_next_line(STDIN_FILENO);
+		line = get_next_line(g_in);
 		if (!line || g_sig == 1)
 		{
-			if (!line)
-				ft_putendl_fd("here-document error", 2);
-			free_heredoc(fd, path, sep, line);
+			finish_by_ctrl(fd, path, sep, line);
 			return (-1);
 		}
 		if (sep == NULL && (line[0] == '\n' || line[0] == '\0'))

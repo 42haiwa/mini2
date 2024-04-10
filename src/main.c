@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:37:49 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/09 23:43:12 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:52:18 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_str_tab(char **str_tab)
 	}
 }
 
-void	init(t_core *core, char **envp)
+void	init(t_core *core, char **envp, char **buf)
 {
 	struct sigaction	new_action;
 	size_t				i;
@@ -42,11 +42,11 @@ void	init(t_core *core, char **envp)
 	core->lexer_out = NULL;
 	core->folder = "";
 	core->err_code = 0;
-	signal(SIGINT, handler);
 	new_action.sa_handler = SIG_IGN;
 	new_action.sa_flags = 0;
 	sigemptyset(&new_action.sa_mask);
 	sigaction(SIGQUIT, &new_action, NULL);
+	*buf = NULL;
 }
 
 void	free_lexing(t_core *core)
@@ -81,19 +81,22 @@ int	start(char *buf, t_core *core)
 	// if (core->print_lex > 1)
 	// 	rprint(core->execution_three);
 volatile int		g_sig = 0;
+volatile int		g_in = -1;
 
 int	main(int argc, char *argv[], char *envp[])
 {
 	char	*buf;
 	t_core	core;
 
-	buf = NULL;
-	core.print_lex = argc;
+	ft_memset(&core, 0, sizeof(t_core));
+	core.print_lex = argc - argc;
 	(void) argv;
-	init(&core, envp);
+	init(&core, envp, &buf);
 	while (1)
 	{
+		signal(SIGINT, handler);
 		buf = readline("\e[35mminishell \e[33m ➤ \e[21m\e[0m ");
+		signal(SIGINT, handler3);
 		if (buf == NULL)
 		{
 			printf("exit\n");

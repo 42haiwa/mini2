@@ -6,19 +6,19 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 00:46:45 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/05 18:44:34 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:47:11 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "minishell.h"
 
-void	add_to_list(t_list **list, char *buf, int read_return)
+void	add_to_list(t_gnl **list, char *buf, int read_return)
 {
 	int		i;
-	t_list	*last;
-	t_list	*new_block;
+	t_gnl	*last;
+	t_gnl	*new_block;
 
-	new_block = malloc(sizeof(t_list));
+	new_block = malloc(sizeof(t_gnl));
 	if (!new_block)
 		return ;
 	new_block->next = NULL;
@@ -41,7 +41,7 @@ void	add_to_list(t_list **list, char *buf, int read_return)
 	last->next = new_block;
 }
 
-void	read_and_stack(t_list **list, int *read_return, int fd)
+void	read_and_stack(t_gnl **list, int *read_return, int fd)
 {
 	char	*buf;
 
@@ -62,7 +62,7 @@ void	read_and_stack(t_list **list, int *read_return, int fd)
 	}
 }
 
-void	_get_line(t_list *list, char **line)
+void	_get_line(t_gnl *list, char **line)
 {
 	size_t	i;
 	size_t	j;
@@ -90,41 +90,41 @@ void	_get_line(t_list *list, char **line)
 	(*line)[j] = '\0';
 }
 
-void	clear_list(t_list **list)
+void	clear_list(t_gnl **list)
 {
-	t_list	*last;
-	t_list	*clean_node;
+	t_gnl	*last;
+	t_gnl	*cl_node;
 	int		i;
 	int		j;
 
-	clean_node = malloc(sizeof(t_list));
-	if (list == NULL || clean_node == NULL)
+	cl_node = malloc(sizeof(t_gnl));
+	if (list == NULL || cl_node == NULL)
 		return ;
-	clean_node->next = NULL;
+	cl_node->next = NULL;
 	last = get_last_block(*list);
 	i = 0;
 	while (last->data[i] && last->data[i] != '\n')
 		i++;
 	if (last->data && last->data[i] == '\n')
 		i++;
-	clean_node->data = malloc(sizeof(char)
-			* ((_ft_strlen(last->data) - i) + 1));
-	if (clean_node->data == NULL)
+	cl_node->data = malloc(sizeof(char) * ((_ft_strlen(last->data) - i) + 1));
+	if (cl_node->data == NULL)
 		return ;
 	j = 0;
 	while (last->data[i])
-		clean_node->data[j++] = last->data[i++];
-	clean_node->data[j] = '\0';
+		cl_node->data[j++] = last->data[i++];
+	cl_node->data[j] = '\0';
 	dealloc_list(*list);
-	*list = clean_node;
+	*list = cl_node;
 }
 
 char	*get_next_line(int fd)
 {
-	static t_list	*list;
+	static t_gnl	*list;
 	char			*line;
 	int				read_return;
 
+	signal(SIGINT, handler3);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	read_return = 1;

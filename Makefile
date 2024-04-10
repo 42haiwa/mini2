@@ -38,6 +38,8 @@ SRC			= src/main.c \
 		src/parsing/bill_three.c \
 		src/parsing/parse_io_n.c \
 		src/parsing/parsing_utils.c \
+		src/gnl/get_next_line.c \
+		src/gnl/get_next_line_utils.c \
 		src/parsing/heredoc.c
 
 OBJ 		= $(SRC:.c=.o)
@@ -49,21 +51,21 @@ LIBGNL		= lib/gnl/libgnl.a
 
 CC 			= cc
 CLONE		= git clone --depth=1
-CFLAGS 		= -Wall -Wextra -Werror -Iinclude
+CFLAGS 		= -Wall -Wextra -Werror -Iinclude -g
 LDFLAGS 	= -lreadline
 
 NAME 		= minishell
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(LIBGNL)
+$(NAME): $(OBJ) $(LIBFT) #$(LIBGNL)
 	$(CC) $(CFLAGS) $^ -o $(NAME) $(LDFLAGS)
 
 $(LIBFT):
 	$(MAKE) -C lib/libft
 	
-$(LIBGNL):
-	$(MAKE) -C lib/gnl
+# $(LIBGNL):
+# 	$(MAKE) -C lib/gnl
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -73,12 +75,11 @@ debug: fclean
 
 clean: 
 	if [ -d "$(FT)" ]; then $(MAKE) clean -C $(FT); fi
-	if [ -d "$(GNL)" ]; then $(MAKE) clean -C $(GNL); fi
 	$(RM) $(OBJ)
+#	if [ -d "$(GNL)" ]; then $(MAKE) clean -C $(GNL); fi
 
 fclean: clean
 	$(RM) $(LIBFT)
-	$(RM) $(LIBGNL)
 	$(RM) $(NAME)
 
 clear:

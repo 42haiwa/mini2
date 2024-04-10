@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:18:51 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/10 00:18:58 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:42:43 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ void	bill_three(t_core *core)
 			continue ;
 		if (pa.i == 0 && ft_strcmp(pa.splited[0], "\6LESSLESS\6") == 0 \
 		&& pa.splited[pa.i + 1] && !pa.splited[pa.i + 2])
-			heredoc(1, pa.splited[pa.i + 1]);
+		{
+			heredoc(999, pa.splited[pa.i + 1]);
+			unlink("/tmp/heredoc999");
+		}
 		inside_three(core, &pa);
 	}
 	free_str_tab(pa.splited);
