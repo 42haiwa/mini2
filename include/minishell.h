@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 10:03:18 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/12 12:57:44 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:56:52 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 
 # include "libft.h"
 
-extern volatile int		g_sig;
-extern volatile int		g_in;
+extern int		g_sig;
+extern int		g_in;
 
 typedef struct s_node
 {
@@ -288,6 +288,7 @@ int		is_export_enable(char c);
 int		is_end(char c);
 //utils5
 char	*replace(char *s, char *old, char *new);
+void	set_err_ctrl(t_core *core);
 //export_unset_utils
 int		check_getter(char *getter);
 //extra

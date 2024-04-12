@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:37:49 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/12 12:55:10 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:56:34 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ void	free_str_tab(char **str_tab)
 	}
 }
 
-void	init(t_core *core, char **envp, char **buf)
+void	init(t_core *core, char **envp, char **buf, char **argv)
 {
 	struct sigaction	new_action;
 	size_t				i;
 
+	(void) argv;
+	ft_memset(core, 0, sizeof(t_core));
 	i = 0;
 	while (envp[i])
 		i++;
@@ -80,22 +82,21 @@ int	start(char *buf, t_core *core)
 
 	// if (core->print_lex > 1)
 	// 	rprint(core->execution_three);
-volatile int		g_sig = 0;
-volatile int		g_in = -1;
+int		g_sig = 0;
+int		g_in = -1;
 
 int	main(int argc, char *argv[], char *envp[])
 {
 	char	*buf;
 	t_core	core;
 
-	ft_memset(&core, 0, sizeof(t_core));
 	core.print_lex = argc - argc;
-	(void) argv;
-	init(&core, envp, &buf);
+	init(&core, envp, &buf, argv);
 	while (1)
 	{
 		signal(SIGINT, handler);
 		buf = readline("\e[35mminishell \e[33m ➤ \e[21m\e[0m ");
+		set_err_ctrl(&core);
 		signal(SIGINT, handler3);
 		if (buf == NULL)
 		{

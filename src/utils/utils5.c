@@ -6,11 +6,18 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:42:18 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/05 18:42:35 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:09:38 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	set_err_ctrl(t_core *core)
+{
+	if (g_sig == 1)
+		core->err_code = 130;
+	g_sig = 0;
+}
 
 char	*replace(char *s, char *old, char *new)
 {
