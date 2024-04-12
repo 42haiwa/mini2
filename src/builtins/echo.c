@@ -6,21 +6,30 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:32:39 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/03 11:10:32 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/12 13:07:29 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	check_error(int argc)
+{
+	if (argc <= 1)
+	{
+		write(1, "\n", 1);
+		return (1);
+	}
+	return (0);
+}
 
 void	echo(char **argv, int argc, t_core *core)
 {
 	int	i;
 	int	is_n;
 
-	(void) core;
 	i = 1;
 	is_n = 0;
-	if (!(argc > 1))
+	if (check_error(argc))
 		return ;
 	if (argv[1][0] == '-' && argv[1][1] == 'n')
 	{

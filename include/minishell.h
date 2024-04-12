@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 10:03:18 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/10 14:53:05 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:57:44 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define END 8
 # define GREAT 1
 # define THREE execution_three
-# define GREATGREAT 2
+# define GREATGREAT 
 # define LESS 3
 # define LESSLESS 4
 # include <unistd.h>
@@ -297,7 +297,7 @@ char	**split_buf(char const *buf);
 void	bill_three(t_core *core);
 int		check_redirect(char **split, size_t const i);
 //heredoc
-int		heredoc(int id, char *sep);
+int		heredoc(int id, char *sep, t_core *core);
 //parse_io_n
 void	parse_io_n(t_core *core, size_t lpipe, t_node *curr, char **splited);
 

@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 23:52:25 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/10 18:15:12 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:57:28 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	parse_while(t_core *co, size_t lpipe, t_node *curr, char **splited)
 		{
 			co->n_heredoc++;
 			curr->heredoc_id = co->n_heredoc;
-			if (heredoc(curr->heredoc_id, splited[i + 1]) == -1)
+			if (heredoc(curr->heredoc_id, splited[i + 1], co) == -1)
 				curr->heredoc_id = -1;
 			if (splited[i + 1])
 				i++;

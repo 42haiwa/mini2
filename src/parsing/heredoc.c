@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:57:26 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/10 18:33:26 by cjouenne         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:53:42 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	finish_by_ctrl(int fd, char *path, char *sep, char *line)
 	free_heredoc(fd, path, sep, line);
 }
 
-int	heredoc(int id, char *sep)
+int	heredoc(int id, char *sep, t_core *core)
 {
 	int		fd;
 	char	*path;
@@ -61,6 +61,7 @@ int	heredoc(int id, char *sep)
 		line = get_next_line(g_in);
 		if (!line || g_sig == 1)
 		{
+			core->err_code = 130;
 			finish_by_ctrl(fd, path, sep, line);
 			return (-1);
 		}

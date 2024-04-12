@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:02:20 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/11 18:34:21 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:52:25 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	lexing(char **splited, t_core *core)
 			core->lex_x = 0;
 			lexing2(splited, core);
 			add_block(core->lex_join, core, 0);
-			printf("FREE: %p\n", core->lex_join);
 			free(core->lex_join);
 			core->lex_join = NULL;
 		}

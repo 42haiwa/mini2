@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:18:24 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/10 14:34:34 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/12 14:44:31 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static void	free_exit(int option, char **argv, t_core *core)
 			i++;
 		}
 	}
+	if (argv == NULL)
+		option = core->err_code;
 	free_str_tab(argv);
 	rl_clear_history();
 	exit(option);
@@ -68,7 +70,7 @@ void	ft_exit(int argc, char **argv, t_core *core)
 {
 	if (argc == 1)
 	{
-		free_exit(0, argv, core);
+		free_exit(core->err_code, argv, core);
 	}
 	else
 	{
@@ -76,7 +78,7 @@ void	ft_exit(int argc, char **argv, t_core *core)
 		{
 			if (argc > 2)
 			{
-				ft_putstr_fd("error: too many arguments\n", 2);
+				ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 				core->err_code = 1;
 				return ;
 			}
