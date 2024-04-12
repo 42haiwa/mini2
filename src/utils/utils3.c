@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 04:00:35 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/05 17:33:21 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:34:28 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*safe_join(char *s1, char *s2, int free_s1, int free_s2)
 {
 	char	*result;
-
+	
 	if (!s1 && s2)
 	{
 		result = ft_strdup(s2);
@@ -28,12 +28,13 @@ char	*safe_join(char *s1, char *s2, int free_s1, int free_s2)
 		result = ft_strdup(s1);
 		if (free_s1)
 			free(s1);
-		return (s1);
+		return (result);
 	}
 	if (!s1 && !s2)
 		return (ft_strdup(""));
 	result = ft_strjoin(s1, s2);
-	free(s1);
+	if (free_s1)
+		free(s1);
 	if (free_s2)
 		free(s2);
 	return (result);

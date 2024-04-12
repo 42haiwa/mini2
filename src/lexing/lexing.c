@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 13:02:20 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/03 13:41:14 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:34:21 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	lexing3(char **splited, t_core *core)
 void	join_d_quote(t_core *c)
 {
 	c->lex_join = safe_join(c->lex_join, c->get_d_quote[c->lex_count2] \
-	, 0, 0);
+	, 1, 0);
 	if (c->get_d_quote[c->lex_count2])
 		c->lex_x += ft_strlen(c->get_d_quote[c->lex_count2]) + 1;
 	else
@@ -41,7 +41,7 @@ void	lexing2(char **splited, t_core *c)
 		if (c->first == '\'')
 		{
 			c->lex_join = safe_join(c->lex_join, \
-			c->get_quote[c->lex_count], 0, 0);
+			c->get_quote[c->lex_count], 1, 0);
 			if (c->get_quote[c->lex_count])
 				c->lex_x += ft_strlen(c->get_quote[c->lex_count]) + 1;
 			else
@@ -76,6 +76,7 @@ void	lexing(char **splited, t_core *core)
 			core->lex_x = 0;
 			lexing2(splited, core);
 			add_block(core->lex_join, core, 0);
+			printf("FREE: %p\n", core->lex_join);
 			free(core->lex_join);
 			core->lex_join = NULL;
 		}
