@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 10:03:18 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/14 15:16:00 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/14 22:51:17 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define END 8
 # define GREAT 1
 # define THREE execution_three
-# define GREATGREAT 
+# define GREATGREAT 2
 # define LESS 3
 # define LESSLESS 4
 # include <unistd.h>
@@ -240,7 +240,8 @@ int		in_second_exec(t_core *core, t_exec *s);
 int		is_token(char const *s);
 int		check_builtins_no_exec(char *buf);
 //utils
-char	*add_char(char *s, char c, int index);
+//char	*add_char(char *s, char c, int index);
+char	*add_char(char *s, char c, int index, t_core *core);
 size_t	get_len(const char *s, int *index, const char c);
 //void	add_char(char *s, char c, int index);
 //handler
@@ -261,7 +262,6 @@ void	init_var(t_core *core);
 //get_quote
 char	**get_quote(char *buf);
 
-char	*replace(char *s, char *old, char *new);
 char	**exctract_env(char *s);
 char	*ft_strcat(char *dest, char *src);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
@@ -290,6 +290,7 @@ int		is_export_enable(char c);
 int		is_end(char c);
 //utils5
 char	*replace(char *s, char *old, char *new);
+char	*replace_with_index(char *s, char *old, char *new, int index);
 void	set_err_ctrl(t_core *core);
 //export_unset_utils
 int		check_getter(char *getter);
