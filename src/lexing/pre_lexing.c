@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:02:47 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/10 18:17:15 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/14 22:52:21 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,16 @@ static void	replace_var4(char **buf, t_core *core)
 		if ((*buf)[core->lex_i + 1] == '<')
 		{
 			if ((*buf)[core->lex_i + 2] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i + 2);
+				*buf = add_char(*buf, ' ', core->lex_i + 2, core);
 			if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i);
-			core->lex_i += 2;
+				*buf = add_char(*buf, ' ', core->lex_i, core);
 		}
 		else
 		{
 			if ((*buf)[core->lex_i + 1] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i + 1);
+				*buf = add_char(*buf, ' ', core->lex_i + 1, core);
 			if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i);
+				*buf = add_char(*buf, ' ', core->lex_i, core);
 		}
 	}
 	if ((*buf)[core->lex_i] == '\t' && !core->lex_bool[2] && !core->lex_bool[1])
@@ -43,17 +42,16 @@ static void	replace_var3(char **buf, t_core *core)
 		if ((*buf)[core->lex_i + 1] == '>')
 		{
 			if ((*buf)[core->lex_i + 2] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i + 2);
+				*buf = add_char(*buf, ' ', core->lex_i + 2, core);
 			if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i);
-			core->lex_i += 2;
+				*buf = add_char(*buf, ' ', core->lex_i, core);
 		}
 		else
 		{
 			if ((*buf)[core->lex_i + 1] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i + 1);
+				*buf = add_char(*buf, ' ', core->lex_i + 1, core);
 			if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i);
+				*buf = add_char(*buf, ' ', core->lex_i, core);
 		}
 	}
 	replace_var4(buf, core);
@@ -74,13 +72,13 @@ static void	replace_var2(char **buf, t_core *core)
 		if (!core->lex_bool[QUOTE])
 			core->lex_bool[D_QUOTE] = !core->lex_bool[D_QUOTE];
 	}
-	if (((*buf)[core->lex_i] == '|' || (*buf)[core->lex_i] == ';') \
+	if (((*buf)[core->lex_i] == '|') \
 			&& !core->lex_bool[BOTH] && !core->lex_bool[D_QUOTE])
 	{
 		if ((*buf)[core->lex_i + 1] != ' ')
-			*buf = add_char(*buf, ' ', core->lex_i + 1);
+			*buf = add_char(*buf, ' ', core->lex_i + 1, core);
 		if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
-			*buf = add_char(*buf, ' ', core->lex_i);
+			*buf = add_char(*buf, ' ', core->lex_i, core);
 	}
 	replace_var3(buf, core);
 	if ((*buf)[core->lex_i] == ' ' \
@@ -108,7 +106,7 @@ static char	*replace_var(char *buf, t_core *core)
 		{
 			save = get_string(buf, '$', core->lex_i);
 			tmp = get_envp(ft_strchr(save, save[1]), core);
-			buf = replace(buf, save, tmp);
+			buf = replace_with_index(buf, save, tmp, core->lex_i);
 			core->lex_i += ft_strlen(tmp) - 1;
 			free(save);
 		}

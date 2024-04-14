@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:41:19 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/03/09 14:40:58 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/14 21:26:32 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ size_t	get_number_quote(const char *buf)
 	val.boolean[1] = 0;
 	while (buf[++val.i])
 	{
-		if (buf[val.i] == '\"')
+		if (buf[val.i] == '\"' && !val.boolean[0])
 		{
 			if (val.boolean[1])
 				val.boolean[1] = 0;
@@ -92,7 +92,7 @@ char	**get_quote(char *buf)
 	stru.quote_number = get_number_quote(buf);
 	if (stru.quote_number == 0)
 		return (NULL);
-	result = ft_calloc(stru.quote_number + 1, sizeof(char *));
+	result = ft_calloc(stru.quote_number * 2 + 1, sizeof(char *));
 	if (!result)
 		return (NULL);
 	stru.var[0] = -1;
@@ -101,7 +101,7 @@ char	**get_quote(char *buf)
 	stru.boolean[1] = 0;
 	while (buf[++stru.var[0]])
 	{
-		if (buf[stru.var[0]] == '\"')
+		if (buf[stru.var[0]] == '\"' && !stru.boolean[0])
 		{
 			if (stru.boolean[1])
 				stru.boolean[1] = 0;

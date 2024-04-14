@@ -6,13 +6,13 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 23:07:05 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/03 09:32:35 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/14 19:00:08 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*add_char(char *s, char c, int index)
+char	*add_char(char *s, char c, int index, t_core *core)
 {
 	char	*result;
 	int		i;
@@ -31,6 +31,7 @@ char	*add_char(char *s, char c, int index)
 	}
 	result[i + 1] = '\0';
 	free(s);
+	core->lex_i++;
 	return (result);
 }
 
