@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:06 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/10 01:14:03 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/14 15:10:15 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,8 @@ int	first_exec(t_core *core, t_exec *stru)
 
 int	second_exec(t_core *core, t_exec *s)
 {
-	if (ft_strcmp(core->execution_three->sons[s->i]->content, "exit") == 0)
-		if (core->execution_three->sons_ctr > 1)
-			return (1);
+	if (in_second_exec(core, s))
+		return (1);
 	if (check_builtins_no_fork(core->execution_three->sons[s->i]->content,
 			s->new_argv, core->execution_three->sons[s->i]->sons_ctr + 1,
 			core))

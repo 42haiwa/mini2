@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 10:03:18 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/12 16:56:52 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/14 15:16:00 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ typedef struct s_export
 	char	*getter;
 	char	*values;
 	char	*tmp;
+	int		is_exec;
 }	t_export;
 
 int		check_exit(char const *s);
@@ -234,6 +235,7 @@ void	end_exec(t_core *core, t_exec *stru);
 //execution3
 void	in_four_exec(t_core *core, t_exec *stru);
 void	in_three_exec(t_core *core, t_exec *stru);
+int		in_second_exec(t_core *core, t_exec *s);
 //execution_utils
 int		is_token(char const *s);
 int		check_builtins_no_exec(char *buf);

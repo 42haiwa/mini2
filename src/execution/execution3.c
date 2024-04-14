@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:06 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/10 18:16:24 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/14 15:18:34 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	in_three_exec(t_core *core, t_exec *stru)
 {
 	ft_putchar_fd(' ', 2);
-	perror("");
+	perror("minishell");
 	stru->i = 0;
 	while (stru->i < 128)
 	{
@@ -84,7 +84,7 @@ void	in_four_exec(t_core *core, t_exec *stru)
 		if (stru->i_fd == -1)
 		{
 			ft_putchar_fd(' ', 2);
-			perror("");
+			perror("minishell");
 			stru->i = 0;
 			while (stru->i < 128)
 			{
@@ -102,4 +102,20 @@ void	in_four_exec(t_core *core, t_exec *stru)
 	}
 	in_four_exec2(core, stru);
 	in_four_exec3(core, stru);
+}
+
+int	in_second_exec(t_core *core, t_exec *s)
+{
+	if (ft_strcmp(core->execution_three->sons[s->i]->content, "exit") == 0
+	|| ft_strcmp(core->execution_three->sons[s->i]->content, "export") == 0
+	|| ft_strcmp(core->execution_three->sons[s->i]->content, "cd") == 0
+	|| ft_strcmp(core->execution_three->sons[s->i]->content, "unset") == 0)
+	{
+		if (core->execution_three->sons_ctr > 1)
+		{
+			free_str_tab(s->new_argv);
+			return (1);
+		}
+	}
+	return (0);
 }
