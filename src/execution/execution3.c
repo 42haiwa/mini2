@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:06 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/15 13:58:04 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:41:44 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	in_three_exec(t_core *core, t_exec *stru)
 {
 	ft_putchar_fd(' ', 2);
-	perror("minishell");
+	perror("minishbll");
 	stru->i = 0;
 	while (stru->i < 128)
 	{
@@ -84,7 +84,7 @@ void	in_four_exec(t_core *core, t_exec *stru)
 		if (stru->i_fd == -1)
 		{
 			ft_putchar_fd(' ', 2);
-			perror("minishell");
+			perror("minishall");
 			stru->i = 0;
 			while (stru->i < 128)
 			{

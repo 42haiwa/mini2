@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 02:03:47 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/15 17:57:04 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:52:06 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ void	five_exec(t_core *core, t_exec *stru)
 {
 	char	*cmd;
 	int		argc;
+	int		n;
 
 	cmd = ft_strdup(core->execution_three->sons[stru->i]->content);
 	argc = core->execution_three->sons[stru->i]->sons_ctr + 1;
-	free_three(&core->execution_three);
+	n = stru->i;
 	stru->i = 0;
 	while (stru->i < 128)
 	{
@@ -27,13 +28,18 @@ void	five_exec(t_core *core, t_exec *stru)
 		ft_close(stru->pipe_fd[stru->i][1]);
 		stru->i++;
 	}
-	if (check_builtins(cmd, stru->new_argv, argc, core))
-		exit(0);
+	if (core->execution_three->sons_ctr > 1 || core->execution_three->sons[n]->input || core->execution_three->sons[n]->output || core->execution_three->sons[n]->heredoc_id)
+	{
+		free_three(&core->execution_three);
+		if (check_builtins(cmd, stru->new_argv, argc, core))
+			exit(0);
+	}
+	free_three(&core->execution_three);
 	execve(cmd, stru->new_argv, core->envp);
 	free_str_tab(core->envp);
 	free_str_tab(stru->new_argv);
 	free(cmd);
-	perror("minishell");
+	perror("minishcll");
 	exit(1);
 }
 
