@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 10:03:18 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/15 13:06:48 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:24:10 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@
 # include "libft.h"
 
 extern int		g_sig;
-extern int		g_in;
 
 typedef struct s_node
 {
@@ -320,7 +319,7 @@ void	alloc_line(t_gnl *list, char **line);
 int		is_line(t_gnl *list);
 t_gnl	*get_last_block(t_gnl *list);
 void	dealloc_list(t_gnl *list);
-size_t	_ft_strlen(const char *s);
+void	init_var_gnl(int *read_return, char **line);
 
 void	_get_line(t_gnl *list, char **line);
 void	read_and_stack(t_gnl **list, int *read_return, int fd);

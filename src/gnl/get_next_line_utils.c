@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 00:46:55 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/10 14:44:16 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:24:18 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,8 @@ void	dealloc_list(t_gnl *list)
 	}
 }
 
-size_t	_ft_strlen(const char *s)
+void	init_var_gnl(int *read_return, char **line)
 {
-	size_t	len;
-
-	len = -1;
-	while (s[++len])
-		;
-	return (len);
+	*read_return = 1;
+	*line = NULL;
 }

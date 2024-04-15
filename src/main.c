@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:37:49 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/15 13:54:15 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:13:45 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	start(char *buf, t_core *core)
 	// if (core->print_lex > 1)
 	// 	rprint(core->execution_three);
 int		g_sig = 0;
-int		g_in = -1;
 
 int	main(int argc, char *argv[], char *envp[])
 {

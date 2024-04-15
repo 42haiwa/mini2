@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 00:46:45 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/15 11:48:39 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:29:14 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	clear_list(t_gnl **list)
 		i++;
 	if (last->data && last->data[i] == '\n')
 		i++;
-	cl_node->data = malloc(sizeof(char) * ((_ft_strlen(last->data) - i) + 1));
+	cl_node->data = malloc(sizeof(char) * ((ft_strlen(last->data) - i) + 1));
 	if (cl_node->data == NULL)
 		return ;
 	j = 0;
@@ -120,15 +120,18 @@ void	clear_list(t_gnl **list)
 
 char	*get_next_line(int fd)
 {
-	static t_gnl	*list;
-	char			*line;
-	int				read_return;
+	static t_gnl		*list;
+	char				*line;
+	int					read_return;
+	struct sigaction	act;
 
-	signal(SIGINT, handler3);
+	ft_bzero(&act, sizeof(struct sigaction));
+	act.sa_handler = handler3;
+	act.sa_flags = 0;
+	sigaction(SIGINT, &act, NULL);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	read_return = 1;
-	line = NULL;
+	init_var_gnl(&read_return, &line);
 	read_and_stack(&list, &read_return, fd);
 	if (list == NULL)
 		return (NULL);

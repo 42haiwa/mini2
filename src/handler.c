@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 11:38:53 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/15 11:50:15 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:14:04 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	handler3(int sig)
 	{
 		g_sig = 1;
 		printf("\n");
-		close(g_in);
-		g_in = -1;
 		rl_replace_line("", 0);
 		rl_on_new_line();
 	}

@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:57:26 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/12 12:53:42 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:15:33 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void	init_heredoc(int *fd, char **path, char **sep, int id)
 static void	free_heredoc(int fd, char *path, char *sep, char *line)
 {
 	g_sig = 0;
-	close(g_in);
 	close(fd);
 	free(path);
 	free(sep);
@@ -53,12 +52,11 @@ int	heredoc(int id, char *sep, t_core *core)
 	char	*path;
 	char	*line;
 
-	g_in = dup(STDOUT_FILENO);
 	init_heredoc(&fd, &path, &sep, id);
 	while (1)
 	{
 		ft_putstr_fd("> ", 1);
-		line = get_next_line(g_in);
+		line = get_next_line(STDOUT_FILENO);
 		if (!line || g_sig == 1)
 		{
 			core->err_code = 130;
