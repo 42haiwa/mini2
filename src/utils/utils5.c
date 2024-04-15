@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:42:18 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/14 22:39:20 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:57:37 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ char	*replace(char *s, char *old, char *new)
 
 char	*replace_with_index(char *s, char *old, char *new, int index)
 {
-	char *find;
-	int old_len;
-	int new_len;
-	int new_size;
-	char *result;
+	char	*find;
+	int		old_len;
+	int		new_len;
+	int		new_size;
+	char	*result;
 
 	find = ft_strstr(s + index, old);
 	if (find != NULL)
@@ -68,4 +68,3 @@ char	*replace_with_index(char *s, char *old, char *new, int index)
 	}
 	return (s);
 }
-

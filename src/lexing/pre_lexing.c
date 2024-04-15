@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:02:47 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/14 22:52:21 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:53:14 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,20 @@ static void	replace_var4(char **buf, t_core *core)
 		if ((*buf)[core->lex_i + 1] == '<')
 		{
 			if ((*buf)[core->lex_i + 2] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i + 2, core);
+				*buf = add_char(*buf, ' ', core->lex_i + 2);
 			if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i, core);
+			{
+				*buf = add_char(*buf, ' ', core->lex_i);
+				core->lex_i += 1;
+			}
+			core->lex_i++;
 		}
 		else
 		{
 			if ((*buf)[core->lex_i + 1] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i + 1, core);
+				*buf = add_char(*buf, ' ', core->lex_i + 1);
 			if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i, core);
+				*buf = add_char(*buf, ' ', core->lex_i);
 		}
 	}
 	if ((*buf)[core->lex_i] == '\t' && !core->lex_bool[2] && !core->lex_bool[1])
@@ -42,16 +46,20 @@ static void	replace_var3(char **buf, t_core *core)
 		if ((*buf)[core->lex_i + 1] == '>')
 		{
 			if ((*buf)[core->lex_i + 2] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i + 2, core);
+				*buf = add_char(*buf, ' ', core->lex_i + 2);
 			if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i, core);
+			{
+				*buf = add_char(*buf, ' ', core->lex_i);
+				core->lex_i++;
+			}
+			core->lex_i++;
 		}
 		else
 		{
 			if ((*buf)[core->lex_i + 1] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i + 1, core);
+				*buf = add_char(*buf, ' ', core->lex_i + 1);
 			if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
-				*buf = add_char(*buf, ' ', core->lex_i, core);
+				*buf = add_char(*buf, ' ', core->lex_i);
 		}
 	}
 	replace_var4(buf, core);
@@ -76,9 +84,9 @@ static void	replace_var2(char **buf, t_core *core)
 			&& !core->lex_bool[BOTH] && !core->lex_bool[D_QUOTE])
 	{
 		if ((*buf)[core->lex_i + 1] != ' ')
-			*buf = add_char(*buf, ' ', core->lex_i + 1, core);
+			*buf = add_char(*buf, ' ', core->lex_i + 1);
 		if (core->lex_i > 0 && (*buf)[core->lex_i - 1] != ' ')
-			*buf = add_char(*buf, ' ', core->lex_i, core);
+			*buf = add_char(*buf, ' ', core->lex_i);
 	}
 	replace_var3(buf, core);
 	if ((*buf)[core->lex_i] == ' ' \

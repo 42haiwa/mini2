@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 10:03:18 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/14 22:51:17 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:06:48 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,8 +240,8 @@ int		in_second_exec(t_core *core, t_exec *s);
 int		is_token(char const *s);
 int		check_builtins_no_exec(char *buf);
 //utils
-//char	*add_char(char *s, char c, int index);
-char	*add_char(char *s, char c, int index, t_core *core);
+char	*add_char(char *s, char c, int index);
+//char	*add_char(char *s, char c, int index, t_core *core);
 size_t	get_len(const char *s, int *index, const char c);
 //void	add_char(char *s, char c, int index);
 //handler
