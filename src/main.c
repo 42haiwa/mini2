@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:37:49 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/15 19:27:53 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/16 12:14:58 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	main(int argc, char *argv[], char *envp[])
 	while (1)
 	{
 		signal(SIGINT, handler);
+		signal(SIGPIPE, SIG_IGN);
 		buf = readline("\e[35mminishell \e[33m ➤ \e[21m\e[0m ");
 		set_err_ctrl(&core);
 		signal(SIGINT, handler3);

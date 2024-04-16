@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjouenne <cjouenne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:06 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/15 21:57:29 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/16 11:24:15 by cjouenne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	in_four_exec(t_core *core, t_exec *stru)
 	core->rfd_val = 0;
 	if ((core->execution_three->sons[stru->i]->input) != 0)
 	{
-		dprintf(2, "");
 		stru->i_fd = open(core->execution_three->sons[stru->i]->input,
 				O_RDONLY);
 		if (stru->i_fd == -1)
