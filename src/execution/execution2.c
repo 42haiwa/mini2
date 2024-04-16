@@ -6,11 +6,19 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 02:03:47 by aallou-v          #+#    #+#             */
-/*   Updated: 2024/04/15 19:52:06 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 22:13:30 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	_ft_free_exec5(t_core *core, t_exec *stru, char *cmd)
+{
+	free_str_tab(core->envp);
+	free_str_tab(stru->new_argv);
+	free(cmd);
+	perror("minishell");
+}
 
 void	five_exec(t_core *core, t_exec *stru)
 {
@@ -28,7 +36,8 @@ void	five_exec(t_core *core, t_exec *stru)
 		ft_close(stru->pipe_fd[stru->i][1]);
 		stru->i++;
 	}
-	if (core->execution_three->sons_ctr > 1 || core->execution_three->sons[n]->input || core->execution_three->sons[n]->output || core->execution_three->sons[n]->heredoc_id)
+	if (core->execution_three->sons_ctr > 1 || core->THREE->sons[n]->input
+		|| core->THREE->sons[n]->output || core->THREE->sons[n]->heredoc_id)
 	{
 		free_three(&core->execution_three);
 		if (check_builtins(cmd, stru->new_argv, argc, core))
@@ -36,10 +45,7 @@ void	five_exec(t_core *core, t_exec *stru)
 	}
 	free_three(&core->execution_three);
 	execve(cmd, stru->new_argv, core->envp);
-	free_str_tab(core->envp);
-	free_str_tab(stru->new_argv);
-	free(cmd);
-	perror("minishcll");
+	_ft_free_exec5(core, stru, cmd);
 	exit(1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:06 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/15 19:52:16 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 22:15:51 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,28 @@ int	first_exec(t_core *core, t_exec *stru)
 	return (0);
 }
 
-int	second_exec(t_core *core, t_exec *s)
+int	second_exec(t_core *c, t_exec *s)
 {
-	if (core->execution_three->sons_ctr <= 1 && !(core->execution_three->sons[s->i]->output) && !(core->execution_three->sons[s->i]->input))
+	if (c->THREE->C <= 1 && !(c->THREE->S[s->i]->OU) &&!(c->THREE->S[s->i]->IN))
 	{
-		if (check_builtins_no_fork(core->execution_three->sons[s->i]->content,
-			s->new_argv, core->execution_three->sons[s->i]->sons_ctr + 1,
-			core))
-				return (1);
+		if (check_builtins_no_fork(c->execution_three->sons[s->i]->content,
+				s->new_argv, c->execution_three->sons[s->i]->sons_ctr + 1,
+				c))
+			return (1);
 	}
-	s->check = ft_get_path(core, core->execution_three->sons[s->i]->content);
-	if (!check_builtins_no_exec(core->execution_three->sons[s->i]->content)
+	s->check = ft_get_path(c, c->execution_three->sons[s->i]->content);
+	if (!check_builtins_no_exec(c->execution_three->sons[s->i]->content)
 		&& s->check)
 	{
-		s->test = core->execution_three->sons[s->i]->content;
-		core->execution_three->sons[s->i]->content = ft_get_path(core, s->test);
+		s->test = c->execution_three->sons[s->i]->content;
+		c->execution_three->sons[s->i]->content = ft_get_path(c, s->test);
 		free(s->test);
 	}
 	if (s->check == NULL)
 	{
-		ft_putstr_fd(core->execution_three->sons[s->i]->content, 2);
+		ft_putstr_fd(c->execution_three->sons[s->i]->content, 2);
 		ft_putendl_fd(": command not found", 2);
-		core->err_code = 127;
+		c->err_code = 127;
 		free_str_tab(s->new_argv);
 		return (1);
 	}
@@ -72,14 +72,6 @@ int	second_exec(t_core *core, t_exec *s)
 
 void	three_exec(t_core *core, t_exec *stru)
 {
-	if ((stru->i + 1) < (size_t) core->execution_three->sons_ctr
-		&& core->execution_three->sons[stru->i]->outpipe)
-	{
-		ft_close(stru->pipe_fd[stru->pipe_ctr][0]);
-		dup2(stru->pipe_fd[stru->pipe_ctr][1], STDOUT_FILENO);
-		ft_close(stru->pipe_fd[stru->pipe_ctr][1]);
-		stru->pipe_fd[stru->pipe_ctr][1] = -1;
-	}
 	if ((core->execution_three->sons[stru->i]->output) != 0)
 	{
 		if (core->execution_three->sons[stru->i]->output_mode == 1)
@@ -92,6 +84,15 @@ void	three_exec(t_core *core, t_exec *stru)
 			in_three_exec(core, stru);
 		dup2(stru->o_fd, STDOUT_FILENO);
 		ft_close(stru->o_fd);
+		return ;
+	}
+	if ((stru->i + 1) < (size_t) core->execution_three->sons_ctr
+		&& core->execution_three->sons[stru->i]->outpipe)
+	{
+		ft_close(stru->pipe_fd[stru->pipe_ctr][0]);
+		dup2(stru->pipe_fd[stru->pipe_ctr][1], STDOUT_FILENO);
+		ft_close(stru->pipe_fd[stru->pipe_ctr][1]);
+		stru->pipe_fd[stru->pipe_ctr][1] = -1;
 	}
 }
 
@@ -110,7 +111,7 @@ void	four_exec(t_core *core, t_exec *stu)
 	}
 	if (stu->i - k > 1 && core->execution_three->sons[stu->i - k - 2]->outpipe)
 	{
-		ft_close(stu->pipe_fd[stu->pipe_ctr][1]);
+		ft_close(stu->pipe_fd[stu->pipe_ctr - 1][1]);
 		dup2(stu->pipe_fd[stu->pipe_ctr - 1][0], STDIN_FILENO);
 		ft_close(stu->pipe_fd[stu->pipe_ctr - 1][0]);
 		stu->pipe_fd[stu->pipe_ctr - 1][0] = -1;

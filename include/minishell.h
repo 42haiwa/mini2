@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 10:03:18 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/15 14:24:10 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 22:15:17 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@
 # define END 8
 # define GREAT 1
 # define THREE execution_three
+# define C sons_ctr
+# define S sons
+# define IN input
+# define OU output
 # define GREATGREAT 2
 # define LESS 3
-# define LESSLESS 4
+# define LESSLESS 4	
 # include <unistd.h>
 # include <signal.h>
 # include <stdio.h>
@@ -83,6 +87,7 @@ typedef struct s_core
 	int				redirect_parse_tracker;
 	t_node			*execution_three;
 	int				n_heredoc;
+	int				rfd_val;
 }	t_core;
 
 /***************
@@ -232,9 +237,11 @@ void	six_exec(t_core *core, t_exec *stru);
 void	init_exec(t_exec *stru, t_core *core);
 void	end_exec(t_core *core, t_exec *stru);
 //execution3
-void	in_four_exec(t_core *core, t_exec *stru);
+int		in_four_exec(t_core *core, t_exec *stru);
 void	in_three_exec(t_core *core, t_exec *stru);
 int		in_second_exec(t_core *core, t_exec *s);
+//execution4
+void	ft_free_exec4(t_core *core, t_exec *stru);
 //execution_utils
 int		is_token(char const *s);
 int		check_builtins_no_exec(char *buf);

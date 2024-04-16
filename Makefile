@@ -20,6 +20,7 @@ SRC			= src/main.c \
 		src/execution/execution.c \
 		src/execution/execution2.c \
 		src/execution/execution3.c \
+		src/execution/execution4.c \
 		src/execution/execution_utils.c \
 		src/handler.c \
 		src/get_path.c \

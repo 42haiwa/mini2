@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:18:24 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/15 19:33:45 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:05:22 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	free_exit(int option, char **argv, t_core *core)
 	if (core)
 	{
 		free_three(&core->execution_three);
-		//free_str_tab(core->envp);
 	}
 	if (core->stru != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: aallou-v <aallou-v@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 16:03:06 by cjouenne          #+#    #+#             */
-/*   Updated: 2024/04/15 19:41:44 by aallou-v         ###   ########.fr       */
+/*   Updated: 2024/04/15 21:57:29 by aallou-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	in_four_exec3(t_core *core, t_exec *stru)
 		free(tmp);
 		stru->i_fd = open(path, O_RDONLY);
 		dup2(stru->i_fd, STDIN_FILENO);
+		core->rfd_val = 1;
 		ft_close(stru->i_fd);
 		unlink(path);
 		free(path);
@@ -75,33 +76,26 @@ void	in_four_exec2(t_core *core, t_exec *stru)
 	}
 }
 
-void	in_four_exec(t_core *core, t_exec *stru)
+int	in_four_exec(t_core *core, t_exec *stru)
 {
+	core->rfd_val = 0;
 	if ((core->execution_three->sons[stru->i]->input) != 0)
 	{
+		dprintf(2, "");
 		stru->i_fd = open(core->execution_three->sons[stru->i]->input,
 				O_RDONLY);
 		if (stru->i_fd == -1)
 		{
-			ft_putchar_fd(' ', 2);
-			perror("minishall");
-			stru->i = 0;
-			while (stru->i < 128)
-			{
-				ft_close(stru->pipe_fd[stru->i][0]);
-				ft_close(stru->pipe_fd[stru->i][1]);
-				stru->i++;
-			}
-			free_three(&core->execution_three);
-			free_str_tab(stru->new_argv);
-			free_str_tab(core->envp);
+			ft_free_exec4(core, stru);
 			exit(1);
 		}
 		dup2(stru->i_fd, STDIN_FILENO);
+		core->rfd_val = 1;
 		ft_close(stru->i_fd);
 	}
 	in_four_exec2(core, stru);
 	in_four_exec3(core, stru);
+	return (core->rfd_val);
 }
 
 int	in_second_exec(t_core *core, t_exec *s)
